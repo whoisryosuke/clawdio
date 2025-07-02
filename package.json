@@ -1,0 +1,71 @@
+{
+  "name": "clawdio",
+  "version": "0.0.1",
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/clawdio.umd.js",
+  "module": "./dist/clawdio.es.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/clawdio.es.js",
+      "require": "./dist/clawdio.umd.js"
+    }
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "format": "prettier --write src/**/*.{css,js,tsx,json}",
+    "preview": "vite preview",
+    "commit": "npx cz"
+  },
+  "dependencies": {
+    "clawdio-bitcrusher": "file:./modules/bitcrusher/pkg",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "styled-components": "^6.0.7",
+    "zustand": "^5.0.6"
+  },
+  "devDependencies": {
+    "commitizen": "^4.3.1",
+    "@types/react": "^18.2.15",
+    "@types/react-dom": "^18.2.7",
+    "@types/styled-components": "^5.1.26",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "@vitejs/plugin-react": "^4.0.3",
+    "cz-conventional-changelog": "^3.3.0",
+    "eslint": "^8.45.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.3",
+    "prettier": "^3.0.0",
+    "typescript": "^5.0.2",
+    "vite": "^4.4.5",
+    "vite-plugin-dts": "^3.4.0",
+    "vite-tsconfig-paths": "^5.1.4"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "styled-components": "^6.0.7"
+  },
+  "command": {
+    "publish": {
+      "conventionalCommits": true
+    }
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  }
+}
