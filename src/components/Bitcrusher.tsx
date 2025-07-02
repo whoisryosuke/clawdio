@@ -1,23 +1,24 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import useAudioStore from "@/store/audio";
 // import { Input, Slider } from "@whoisryosuke/oat-milk-design";
 import BitcrusherWorklet from "@/workers/bitcrusher.ts?url";
-import wasm from "@/wasm/clawdio-bitcrusher.wasm?url";
+import wasm from "clawdio-bitcrusher/clawdio_bitcrusher_bg.wasm?url";
 import type {
   AudioWorkletEventMessage,
   BitcrusherOptions,
 } from "@/workers/types";
 
-type Props = {};
+type Props = {
+  bits?: number;
+  normfreq?: number;
+};
 
-const Bitcrusher = (props: Props) => {
+const Bitcrusher = ({ bits = 4, normfreq = 0.1 }: Props) => {
   const [loaded, setLoaded] = useState(false);
-  const [bits, setBits] = useState(4);
-  const [normfreq, setNormfreq] = useState(0.1);
   const nodeRef = useRef<AudioWorkletNode | null>(null);
   const { audioCtx, addAudioNode, removeAudioNode } = useAudioStore();
 
-  const handleNodeMessage = (e: any) => {
+  const handleNodeMessage = (e: MessageEvent) => {
     const event = e.data as AudioWorkletEventMessage<number>;
     // WASM was loaded - so lets initialize our Rust-based pitch detection module
     if (event.type === "wasm-loaded") {
@@ -38,7 +39,7 @@ const Bitcrusher = (props: Props) => {
     }
   };
 
-  const createNode = async () => {
+  const createNode = useCallback(async () => {
     // Fetch the WASM module
     const response = await fetch(wasm);
     const wasmData = await response.arrayBuffer();
@@ -64,7 +65,7 @@ const Bitcrusher = (props: Props) => {
     } catch (e) {
       console.log("failed to create worklet", e);
     }
-  };
+  }, [addAudioNode, audioCtx]);
 
   useEffect(() => {
     if (!audioCtx || loaded) return;
@@ -74,29 +75,19 @@ const Bitcrusher = (props: Props) => {
       if (nodeRef.current) removeAudioNode("bitcrusher");
       nodeRef.current?.disconnect();
     };
-  }, [audioCtx]);
+  }, [audioCtx, loaded, createNode, removeAudioNode]);
 
-  const handleBitsChange = (sliderValue: number) => {
-    console.log(sliderValue);
-    setBits(sliderValue);
-
+  useEffect(() => {
     if (!nodeRef.current) return;
-    nodeRef.current.port.postMessage({ type: "set-bits", data: sliderValue });
-    // if (nodeRef.current) nodeRef.current.gain.value = newGain;
-  };
-  const handleNormfreqChange = (sliderValue: number) => {
-    console.log(sliderValue);
-    setNormfreq(sliderValue);
-    console.log("normfreq", sliderValue);
+    nodeRef.current.port.postMessage({ type: "set-bits", data: bits });
+  }, [bits]);
 
+  useEffect(() => {
     if (!nodeRef.current) return;
-    nodeRef.current.port.postMessage({
-      type: "set-normfreq",
-      data: sliderValue,
-    });
-  };
+    nodeRef.current.port.postMessage({ type: "set-normfreq", data: normfreq });
+  }, [normfreq]);
 
-  return <div></div>;
+  return <></>;
 };
 
 export default Bitcrusher;

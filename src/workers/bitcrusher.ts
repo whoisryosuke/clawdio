@@ -47,24 +47,23 @@ class BitcrusherWorklet extends AudioWorkletProcessor {
     }
   };
 
-  process(inputs: Float32Array[][], outputs: Float32Array[][], parameters) {
+  process(inputs: Float32Array[][], outputs: Float32Array[][]) {
     // Check if we have worklet initialized
     if (this.worklet == null) return true;
 
     inputs.forEach((channels, channelIndex) => {
       channels.forEach((inputSamples, sampleIndex) => {
+        // We check again since TS insists (and maybe it changes over course of loop?)
+        if (this.worklet == null) return true;
+
+        // Process samples using Rust WASM module
         const processing = this.worklet.process(inputSamples, this.normfreq);
-        if (channelIndex === 0)
-          console.log("output before", inputSamples, processing);
 
         // Make sure you loop through each output value and assign it manually
         // can't just assign a whole array
         processing.forEach(
           (val, index) => (outputs[channelIndex][sampleIndex][index] = val)
         );
-
-        if (channelIndex === 0)
-          console.log("output after", outputs[channelIndex][sampleIndex]);
       });
     });
 

@@ -4,9 +4,6 @@ import { devtools } from "zustand/middleware";
 // type CustomNode = EchoNode;
 // type AudioNodes = AudioNode | AudioWorkletNode | CustomNode;
 type AudioNodes = AudioNode | AudioWorkletNode;
-type AudioNodeItem = {
-  node: AudioNodes;
-};
 
 export interface AudioState {
   audioCtx: AudioContext;
@@ -44,23 +41,6 @@ export const useAudioStore = create<AudioState>()(
       }),
 
     // Config
-
-    // ADSR
-    adsr: {
-      attack: 0.1,
-      decay: 0.2,
-      sustain: 0.7,
-      release: 0.3,
-      peak: 1.0,
-    },
-    setADSR: (adsr) =>
-      set((state) => ({
-        ...state,
-        adsr: {
-          ...state.adsr,
-          ...adsr,
-        },
-      })),
   }))
 );
 
