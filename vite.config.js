@@ -8,6 +8,7 @@ import tsconfigPaths from "vite-tsconfig-paths";
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react(), dts(), tsconfigPaths()],
+  assetsInclude: ["**/*.wasm"],
   build: {
     lib: {
       entry: resolve("src", "index.ts"),

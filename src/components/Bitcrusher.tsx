@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import useAudioStore from "@/store/audio";
 // import { Input, Slider } from "@whoisryosuke/oat-milk-design";
 import BitcrusherWorklet from "@/workers/bitcrusher.ts?url";
-import wasm from "clawdio-bitcrusher/clawdio_bitcrusher_bg.wasm?url";
+// import wasm from "clawdio-bitcrusher/clawdio_bitcrusher_bg.wasm?url";
 import type {
   AudioWorkletEventMessage,
   BitcrusherOptions,
@@ -41,7 +41,8 @@ const Bitcrusher = ({ bits = 4, normfreq = 0.1 }: Props) => {
 
   const createNode = useCallback(async () => {
     // Fetch the WASM module
-    const response = await fetch(wasm);
+    const path = "./modules/clawdio_bitcrusher_bg.wasm";
+    const response = await fetch(path);
     const wasmData = await response.arrayBuffer();
 
     // Create the worklet
