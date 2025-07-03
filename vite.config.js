@@ -4,10 +4,11 @@ import dts from "vite-plugin-dts";
 import { resolve } from "node:path";
 import { name } from "./package.json";
 import tsconfigPaths from "vite-tsconfig-paths";
+import { preserveUrlImportsPlugin } from "./scripts/vite-preserve-url";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react(), dts(), tsconfigPaths()],
+  plugins: [react(), dts(), tsconfigPaths(), preserveUrlImportsPlugin],
   assetsInclude: ["**/*.wasm"],
   build: {
     lib: {
@@ -16,6 +17,8 @@ export default defineConfig({
       formats: ["es", "umd"],
       fileName: (format) => `${name}.${format}.js`,
     },
+
+    assetsInlineLimit: 0, // disables base64 inlining
 
     rollupOptions: {
       external: [

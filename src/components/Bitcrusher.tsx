@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import useAudioStore from "@/store/audio";
 // import { Input, Slider } from "@whoisryosuke/oat-milk-design";
-import BitcrusherWorklet from "@/workers/bitcrusher.ts?url";
+import BitcrusherWorklet from "@/workers/bitcrusher.ts?worker&url";
 // import wasm from "clawdio-bitcrusher/clawdio_bitcrusher_bg.wasm?url";
 import type {
   AudioWorkletEventMessage,
