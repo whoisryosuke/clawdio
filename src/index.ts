@@ -1,3 +1,3 @@
-import Bitcrusher from "./components/Bitcrusher";
+import createBitcrusherNode from "./nodes/BitcrusherNode";
 
-export { Bitcrusher };
+export { createBitcrusherNode };
