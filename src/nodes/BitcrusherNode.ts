@@ -1,4 +1,5 @@
 import BitcrusherWorklet from "@/workers/bitcrusher.ts?worker&url";
+import BitcrusherWasmPath from "@/assets/modules/clawdio_bitcrusher_bg.wasm?url";
 import type {
   AudioWorkletEventMessage,
   BitcrusherOptions,
@@ -45,13 +46,13 @@ const createBitcrusherNode = async (
 
   const createNode = async () => {
     // Fetch the WASM module
-    const path = "./modules/clawdio_bitcrusher_bg.wasm";
-    const response = await fetch(path);
+    const response = await fetch(BitcrusherWasmPath);
     const wasmData = await response.arrayBuffer();
 
     // Create the worklet
     console.log("creating worklet...");
     try {
+      // Resolve the URL relative to the current module
       await audioCtx.audioWorklet.addModule(BitcrusherWorklet);
       nodeRef = new AudioWorkletNode(audioCtx, "bitcrusher");
 

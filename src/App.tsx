@@ -1,7 +1,5 @@
-import Bitcrusher from "./components/Bitcrusher";
-
 function App() {
-  return <Bitcrusher />;
+  return <div></div>;
 }
 
 export default App;

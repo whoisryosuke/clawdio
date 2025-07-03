@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef } from "react";
 import useAudioStore from "@/store/audio";
-import createBitcrusherNode, { BitcrusherNode } from "@/nodes/BitcrusherNode";
+import { createBitcrusherNode } from "clawdio";
+import type { BitcrusherNode } from "clawdio";
 
 type Props = {
   bits?: number;

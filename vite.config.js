@@ -8,7 +8,14 @@ import preserveUrlPlugin from "./scripts/vite-preserve-url";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react(), dts(), tsconfigPaths()],
+  base: "./",
+  plugins: [
+    react(),
+    dts({
+      rollupTypes: true, // Bundles all types into a single file
+    }),
+    tsconfigPaths(),
+  ],
 
   // Plugins that only run on workers
   worker: {
