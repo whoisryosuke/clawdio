@@ -1,35 +1,19 @@
-// Custom Vite plugin to preserve new URL() calls for WASM files
-export const preserveUrlImportsPlugin = {
-  name: "preserve-url-imports",
-
-  resolveId(id) {
-    // Mark WASM files as external so they don't get bundled
-    if (id.includes(".wasm")) {
-      return { id, external: true };
-    }
-  },
-
-  transform(code, id) {
-    // Don't transform files that contain WASM URL references
-    if (code.includes("new URL(") && code.includes(".wasm")) {
-      console.log(`Preserving URL calls in: ${id}`);
-      // Return the code unchanged to prevent Vite from transforming new URL() calls
+// When we import WASM in worker, wasm-pack creates an initialization wrapper using `new URL`.
+// Vite transforms any `new URL()` and generates base64 - @see: https://vite.dev/guide/assets.html#new-url-url-import-meta-url
+// That increases bundle by doubling up WASM (once as `.wasm` and another as base64)
+// This prevents that by finding any instances and removing them.
+const preserveUrlPlugin = {
+  name: "worker-preserve-url",
+  transform(code) {
+    if (code.includes("new URL(")) {
+      const searchTerm = /new URL\([^)]*\)/g;
+      const newCode = code.replace(searchTerm, "false");
       return {
-        code: code,
+        code: newCode,
         map: null,
       };
     }
-    // Let other files be transformed normally
-    return null;
-  },
-
-  generateBundle(options, bundle) {
-    // Remove any WASM assets that somehow made it into the bundle
-    Object.keys(bundle).forEach((fileName) => {
-      if (fileName.includes(".wasm")) {
-        console.log(`Removing WASM asset from bundle: ${fileName}`);
-        delete bundle[fileName];
-      }
-    });
   },
 };
+
+export default preserveUrlPlugin;

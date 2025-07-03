@@ -4,12 +4,20 @@ import dts from "vite-plugin-dts";
 import { resolve } from "node:path";
 import { name } from "./package.json";
 import tsconfigPaths from "vite-tsconfig-paths";
-import { preserveUrlImportsPlugin } from "./scripts/vite-preserve-url";
+import preserveUrlPlugin from "./scripts/vite-preserve-url";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react(), dts(), tsconfigPaths(), preserveUrlImportsPlugin],
+  plugins: [react(), dts(), tsconfigPaths()],
+
+  // Plugins that only run on workers
+  worker: {
+    plugins: [preserveUrlPlugin],
+  },
+
+  // Make sure to include `.wasm` files we copied to `/public` in final build
   assetsInclude: ["**/*.wasm"],
+
   build: {
     lib: {
       entry: resolve("src", "index.ts"),
@@ -18,7 +26,7 @@ export default defineConfig({
       fileName: (format) => `${name}.${format}.js`,
     },
 
-    assetsInlineLimit: 0, // disables base64 inlining
+    assetsInlineLimit: 0, // disables base64 inlining. prob not necessary.
 
     rollupOptions: {
       external: [
