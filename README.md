@@ -1,8 +1,10 @@
 # Clawdio
 
-An experimental project aimed to create modern effects for the Web Audio API using WASM and Rust. We leverage the Audio Worklet API to offload audio processing to a separate thread, then use WASM to process the audio even faster using Rust.
+An experimental project aimed to create modern effects for the Web Audio API using WASM and Rust.
 
-This project includes a series of JavaScript modules you can include in your web audio project for creating different effects.
+We leverage the [Audio Worklet API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API/Using_AudioWorklet) to offload audio processing to a separate thread, then use [WebAssembly (WASM)](https://webassembly.org/) to process the audio even faster using [Rust](https://www.rust-lang.org/).
+
+This library includes a series of JavaScript modules you can include in your web audio projects to create different effects.
 
 ## Features
 
@@ -58,6 +60,7 @@ TBD. Should be handled by GitHub Actions.
 
 ## References
 
+- [Processing Web Audio with Rust and WASM](https://whoisryosuke.com/blog/2025/processing-web-audio-with-rust-and-wasm)
 - [rust-wasm-library-template](https://github.com/whoisryosuke/rust-wasm-library-template)
 - [react-vite-library-boilerplate](https://github.com/whoisryosuke/react-vite-library-boilerplate)
 - [web-audio-sketchbook](https://github.com/whoisryosuke/web-audio-playground/)
