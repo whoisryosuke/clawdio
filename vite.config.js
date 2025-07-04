@@ -19,7 +19,7 @@ export default defineConfig({
 
   // Plugins that only run on workers
   worker: {
-    plugins: [preserveUrlPlugin],
+    plugins: () => [preserveUrlPlugin],
   },
 
   // Make sure to include `.wasm` files we copied to `/public` in final build
