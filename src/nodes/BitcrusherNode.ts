@@ -1,4 +1,5 @@
 import BitcrusherWorklet from "@/workers/bitcrusher.ts?worker&url";
+import "@/assets/modules/clawdio_bitcrusher_bg.wasm?no-inline";
 import BitcrusherWasmPath from "@/assets/modules/clawdio_bitcrusher_bg.wasm?url";
 import type {
   AudioWorkletEventMessage,
