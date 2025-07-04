@@ -8,12 +8,8 @@ type Props = {};
 const BitcrusherExample = (props: Props) => {
   return (
     <div>
-      <SamplePad file="music/ff8-magic.mp3">
+      <SamplePad file="./music/ff8-magic.mp3" waveform>
         <Bitcrusher />
-        <div style={{ display: "flex" }}>
-          <Waveform />
-          <StaticWaveform />
-        </div>
       </SamplePad>
     </div>
   );

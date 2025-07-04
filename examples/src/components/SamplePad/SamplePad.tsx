@@ -2,6 +2,8 @@ import { useEffect, useRef, useState, type PropsWithChildren } from "react";
 import useAudioStore from "../../store/audio";
 import { scheduleADSR } from "@/utils/audio";
 import { Button, Stack } from "@whoisryosuke/oat-milk-design";
+import Waveform from "../Waveform/Waveform";
+import StaticWaveform from "../Waveform/StaticWaveform";
 
 const PIANO_KEYS = [
   "C",
@@ -23,6 +25,7 @@ const OCTAVE_RATES = [0.5, 1.0, 2.0];
 
 type Props = {
   file: string;
+  waveform: boolean;
 };
 
 const SamplePad = ({ file, children, ...props }: PropsWithChildren<Props>) => {
@@ -150,6 +153,10 @@ const SamplePad = ({ file, children, ...props }: PropsWithChildren<Props>) => {
       {/* <audio ref={audioElement} preload="auto" src={file} /> */}
       <Stack vertical gap="0.25rem">
         {children}
+        <div style={{ display: "flex" }}>
+          {audioBuffer && <StaticWaveform buffer={audioBuffer} />}
+          <Waveform />
+        </div>
         {/* <AudioTime audio={audioElement} /> */}
         {OCTAVES.map((octave, octaveIndex) => (
           <Stack>
