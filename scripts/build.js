@@ -34,7 +34,7 @@ modules.forEach((moduleName) => {
   log(moduleName, "Found WASM file:", wasmFile);
 
   const wasmFilePath = path.join(wasmPath, wasmFile);
-  const copyPath = path.join(`./public/modules`, wasmFile);
+  const copyPath = path.join(`./src/assets/modules`, wasmFile);
   copyFileSync(wasmFilePath, copyPath);
   log(moduleName, "Copied WASM file to build folder", wasmFilePath, copyPath);
 });
