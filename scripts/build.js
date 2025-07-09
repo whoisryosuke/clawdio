@@ -26,17 +26,6 @@ modules.forEach((moduleName) => {
     "--target",
     "web",
   ]);
-
-  // 2️⃣ Copy WASM files to `/public/modules` folder
-  const wasmPath = `./modules/${moduleName}/pkg`;
-  const files = readdirSync(wasmPath);
-  const wasmFile = files.find((file) => file.endsWith(".wasm"));
-  log(moduleName, "Found WASM file:", wasmFile);
-
-  const wasmFilePath = path.join(wasmPath, wasmFile);
-  const copyPath = path.join(`./src/assets/modules`, wasmFile);
-  copyFileSync(wasmFilePath, copyPath);
-  log(moduleName, "Copied WASM file to build folder", wasmFilePath, copyPath);
 });
 
 log("Build completed successfully 👏🎉");
