@@ -33,4 +33,5 @@ jobs:
         run: npm version ${{ github.event.inputs.version }}
 
       - name: Push new version tag to repository
+        working-directory: ./packages/clawdio
         run: git push origin HEAD --tags
