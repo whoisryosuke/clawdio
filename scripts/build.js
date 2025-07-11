@@ -44,7 +44,7 @@ function releaseModules() {
     const modulePath = `./modules/${moduleName}/pkg`;
 
     execFileSync("npm publish --access public", {
-      cwd: path.join(modulesDir, modulePath),
+      cwd: modulePath,
       stdio: "inherit", // show output in console
       env: {
         ...process.env,
