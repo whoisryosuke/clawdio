@@ -34,4 +34,6 @@ jobs:
 
       - name: Push new version tag to repository
         working-directory: ./packages/clawdio
-        run: git push origin HEAD --tags
+        run: |
+          git push origin main
+          git push origin --tags
