@@ -29,14 +29,18 @@ function releaseModules() {
     log("Trying to release module", moduleName, modulePath);
 
     try {
-      execFileSync("npm", ["publish"], {
-        cwd: modulePath,
-        stdio: "inherit", // show output in console
-        env: {
-          ...process.env,
-          NODE_AUTH_TOKEN: process.env.NODE_AUTH_TOKEN,
-        },
-      });
+      execFileSync(
+        "npm",
+        ["publish", "--registry", "https://registry.npmjs.org/"],
+        {
+          cwd: modulePath,
+          stdio: "inherit", // show output in console
+          env: {
+            ...process.env,
+            NODE_AUTH_TOKEN: process.env.NODE_AUTH_TOKEN,
+          },
+        }
+      );
       log("Successfully released module", moduleName);
     } catch (e) {
       log("Failed to release module", moduleName);
