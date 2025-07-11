@@ -15,10 +15,11 @@ jobs:
           node-version: 22.12.0
           registry-url: https://registry.npmjs.org/
       - uses: jetli/wasm-pack-action@v0.4.0
-      - run: yarn build:modules --release
+      - run: yarn build:modules
+      - run: yarn
+      - run: yarn publish:modules
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-      - run: yarn
       - run: yarn build:library
       - run: npm publish
         working-directory: ./packages/clawdio

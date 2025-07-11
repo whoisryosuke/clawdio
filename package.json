@@ -10,6 +10,7 @@
     "dev": "yarn workspace clawdio-examples dev",
     "build": "yarn build && yarn build:modules",
     "build:modules": "node scripts/build.js",
+    "publish:modules": "node scripts/release-modules.js",
     "build:library": "yarn workspace clawdio build"
   }
 }
