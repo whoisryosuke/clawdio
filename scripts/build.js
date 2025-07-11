@@ -57,7 +57,7 @@ function releaseModules() {
     log("Trying to releas module", moduleName, modulePath);
 
     try {
-      execFileSync("npm", ["publish", "--access", "public"], {
+      execFileSync("npm", ["publish"], {
         cwd: modulePath,
         stdio: "inherit", // show output in console
         env: {
