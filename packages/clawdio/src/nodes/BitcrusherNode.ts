@@ -51,10 +51,15 @@ const createBitcrusherNode = async (
     const wasmData = await response.arrayBuffer();
 
     // Create the worklet
-    console.log("creating worklet...");
+    console.log("creating worklet...", BitcrusherWorklet);
     try {
       // Resolve the URL relative to the current module
       await audioCtx.audioWorklet.addModule(BitcrusherWorklet);
+    } catch (e) {
+      console.log("failed to create module", e);
+    }
+
+    try {
       nodeRef = new AudioWorkletNode(audioCtx, "bitcrusher");
 
       // Send the WASM payload to Audio processor

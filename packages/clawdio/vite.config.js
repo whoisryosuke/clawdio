@@ -19,6 +19,7 @@ export default defineConfig({
 
   // Plugins that only run on workers
   worker: {
+    format: "es",
     plugins: () => [preserveUrlPlugin],
   },
 
