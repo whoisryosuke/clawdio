@@ -29,6 +29,7 @@ jobs:
           node-version: 14.x
 
       - name: Generate new version
+        working-directory: ./packages/clawdio
         run: npm version ${{ github.event.inputs.version }}
 
       - name: Push new version tag to repository
