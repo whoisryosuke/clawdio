@@ -1,3 +1,5 @@
+![Clawdio red logo and white logotype centered on a black background](./docs/clawdio-black-bg.jpg)
+
 # Clawdio
 
 An experimental project aimed to create modern effects for the Web Audio API using WASM and Rust.
