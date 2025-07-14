@@ -12,8 +12,10 @@ This library includes a series of JavaScript modules you can include in your web
 
 ## Getting Started
 
-1. Install the effect you want: `npm install clawdio`
-1. Import the worklet for the effect you need and use it! Check the docs on how to use: `import { Bitcrusher } from 'clawdio'`
+1. Install the library: `npm install clawdio`
+1. Import the worklet for the effect you need and use it! Check the [example app](packages\examples\src\components\Bitcrusher\BitcrusherExample.tsx) on how to use. `import { createBitcrusherNode } from 'clawdio'`
+
+> The library code is packaged together, but each WASM module is bundled and fetched individually to reduce the library size.
 
 ## Development
 
@@ -22,7 +24,7 @@ This project includes both Typescript frontend code for each Audio Worklet, and 
 ### Requirements
 
 - NodeJS
-- Rust
+- [Rust](https://www.rust-lang.org/)
 - [wasm-pack](https://github.com/rustwasm/wasm-pack)
 
 ### Overview
@@ -31,7 +33,7 @@ This library exports audio worklets to use in the Web Audio API.
 
 **Rust WASM** modules go inside `/modules/` folder. Each module should be self-contained and able to build itself using `wasm-pack`. This is based off the [rust-wasm-library-template](https://github.com/whoisryosuke/rust-wasm-library-template).
 
-**Frontend JS** code goes in `/src/` folder. Export any functions, components, etc using the `src/index.ts` file. This gets distributed to NPM.
+**Frontend JS** code goes in `/packages/clawdio/src/` folder. Export any functions, components, etc using the `index.ts` file. This gets distributed to NPM. This based off [react-vite-library-boilerplate](https://github.com/whoisryosuke/react-vite-library-boilerplate).
 
 ### Creating new worklet
 
@@ -46,17 +48,29 @@ Then you can create a Rust WASM module that handles processing:
 1. Change the module name in the `Cargo.toml` to be `clawdio-youreffectname`.
 1. Write any Rust code.
 1. Build the modules: `yarn build:modules`
-1. You should see a `/pkg` folder inside the `/modules/yourmodule/` with the WASM. And if you check `/public` folder, the WASM should be copied there too.
+1. You should see a `/pkg` folder inside the `/modules/yourmodule/` with the WASM.
+1. Install the Rust module as a dependency to the `clawdio` project. Use the `*` as version to ensure it sources locally.
 1. Try using the Rust module in the frontend code.
 
 ### Building
 
-1. Build WASM modules and copy over the `.wasm` files to asset folder: `yarn build:modules`.
+1. Build WASM modules: `yarn build:modules`.
 1. Build the library code: `yarn build`
 
 ### Release
 
-TBD. Should be handled by GitHub Actions.
+1. Increment version in `package.json` of your module (aka `clawdio`, or a Rust module)
+1. Commit the version change: `git commit -m ":bookmark: v4.2.0"`
+1. Push your changes.
+1. Tag the version change: `git tag v4.2.0`
+1. Push the version change: `git push v4.2.0`
+1. Go to GitHub and create a new release. Selec the tag you just created.
+
+The build and release will automatically run once a release is created. You can track this in the GitHub Actions tab.
+
+This publishes the main [`clawdio`](https://www.npmjs.com/package/clawdio) library, as well as all Rust WASM modules, to NPM.
+
+> Working on a more automated system for this soon.
 
 ## References
 

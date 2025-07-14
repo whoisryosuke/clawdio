@@ -1,8 +1,6 @@
-# Rust WASM Library Template
+# Bitcrusher
 
-Write Rust code and compile to WASM for use on the web.
-
-Based on [wasm-pack-template](https://github.com/rustwasm/wasm-pack-template/tree/master) and [this guide.](rustwasm.github.io/docs/book/game-of-life/hello-world.html#build-the-project)
+Bitcrusher effect implemented as a Rust module that gets exported to web using WASM.
 
 ## Requirements
 
@@ -33,3 +31,7 @@ For the general use version you'll likely need to use a build plugin to handle t
 1. Go into build folder: `cd pkg`
 1. Create a link to the module: `yarn link`
 1. Go into another JS project and link the module: `yarn link rust-wasm-audio`
+
+# References
+
+Based on [wasm-pack-template](https://github.com/rustwasm/wasm-pack-template/tree/master) and [this guide.](rustwasm.github.io/docs/book/game-of-life/hello-world.html#build-the-project)
