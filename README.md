@@ -15,9 +15,17 @@ This library includes a series of JavaScript modules you can include in your web
 ## Getting Started
 
 1. Install the library: `npm install clawdio`
-1. Import the worklet for the effect you need and use it! Check the [example app](packages\examples\src\components\Bitcrusher\BitcrusherExample.tsx) on how to use. `import { createBitcrusherNode } from 'clawdio'`
+1. Import the worklet for the effect you need and use it!: `import { createBitcrusherNode } from 'clawdio'`
 
-> The library code is packaged together, but each WASM module is bundled and fetched individually to reduce the library size.
+Check the [example app](packages\examples\src\components\Bitcrusher\BitcrusherExample.tsx) on how to use each module. Documentation is coming soon!
+
+### Using WASM directly
+
+If you want greater control over the WASM, you can import each WASM module directly.
+
+For example the Bitcrusher node would be: `yarn add clawdio-bitcrusher`
+
+You can find an example of how to use it [in the library code](packages\clawdio\src\nodes\BitcrusherNode.ts).
 
 ## Development
 
@@ -36,6 +44,8 @@ This library exports audio worklets to use in the Web Audio API.
 **Rust WASM** modules go inside `/modules/` folder. Each module should be self-contained and able to build itself using `wasm-pack`. This is based off the [rust-wasm-library-template](https://github.com/whoisryosuke/rust-wasm-library-template).
 
 **Frontend JS** code goes in `/packages/clawdio/src/` folder. Export any functions, components, etc using the `index.ts` file. This gets distributed to NPM. This based off [react-vite-library-boilerplate](https://github.com/whoisryosuke/react-vite-library-boilerplate).
+
+> The library code is packaged together, but each WASM module is bundled and fetched individually to reduce the library size. You can also install each Rust module individually and use them directly if desired.
 
 ### Creating new worklet
 
