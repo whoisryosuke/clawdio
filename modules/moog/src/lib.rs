@@ -1,68 +1,77 @@
 use wasm_bindgen::prelude::*;
-// use web_sys::{console};
-
 
 #[wasm_bindgen]
 pub struct MoogModule {
     cutoff: f32,
     resonance: f32,
+
+    // Input and output
+    in1: f32,
+    in2: f32,
+    in3: f32,
+    in4: f32,
+    out1: f32,
+    out2: f32,
+    out3: f32,
+    out4: f32,
 }
 
 #[wasm_bindgen]
 impl MoogModule {
     pub fn new(cutoff: f32, resonance: f32) -> MoogModule {
-        MoogModule { cutoff, resonance }
+        MoogModule {
+            cutoff,
+            resonance,
+            in1: 0.0,
+            in2: 0.0,
+            in3: 0.0,
+            in4: 0.0,
+            out1: 0.0,
+            out2: 0.0,
+            out3: 0.0,
+            out4: 0.0,
+        }
     }
 
     pub fn process(&mut self, samples: &js_sys::Float32Array) -> js_sys::Float32Array {
-
         let samples_vec: Vec<f32> = samples.to_vec();
-        let mut output = samples_vec; 
-        
-        let mut in1 = 0.0;
-        let mut in2 = 0.0;
-        let mut in3 = 0.0;
-        let mut in4 = 0.0;
-        let mut out1 = 0.0;
-        let mut out2 = 0.0;
-        let mut out3 = 0.0;
-        let mut out4 = 0.0;
+        let mut output = samples_vec;
 
-        let f = self.cutoff * 1.16;
+        let f = (self.cutoff * 1.16).clamp(0.0, 0.99);
         let input_factor = 0.35013 * (f * f) * (f * f);
-        let fb = self.resonance * (1.0 - 0.15 * f * f);
+        let fb = (self.resonance * (1.0 - 0.15 * f * f)).clamp(0.0, 0.95);
 
         // Loop over samples and apply bitcrusher effect
         for sample in output.iter_mut() {
             let mut base = *sample;
-            base -= out4 * fb;
+            base -= self.out4 * fb;
             base *= input_factor;
 
+            // Add stability check
+            // Was having an issue where it increments to infinity sometimes
+            // if !base.is_finite() {
+            //     base = 0.0;
+            // }
+
             // Pole 1
-            out1 = base + 0.3 * in1 + (1.0 - f) * out1;
-            in1 = base;
+            self.out1 = base + 0.3 * self.in1 + (1.0 - f) * self.out1;
+            self.in1 = base;
 
             // Pole 2
-            out2 = out1 + 0.3 * in2 + (1.0-f) * out2;
-            in2 = out1;
+            self.out2 = self.out1 + 0.3 * self.in2 + (1.0 - f) * self.out2;
+            self.in2 = self.out1;
 
             // Pole 3
-            out3 = out2 + 0.3 * in3 + (1.0-f) * out3;
-            in3 = out2;
+            self.out3 = self.out2 + 0.3 * self.in3 + (1.0 - f) * self.out3;
+            self.in3 = self.out2;
 
             // Pole 4
-            out4 = out3 + 0.3 * in4 + (1.0-f) * out4;
-            in4 = out3;
+            self.out4 = self.out3 + 0.3 * self.in4 + (1.0 - f) * self.out4;
+            self.in4 = self.out3;
 
-            *sample = out4;
+            *sample = self.out4.clamp(-1.0, 1.0);
         }
 
         js_sys::Float32Array::from(&output[..])
     }
 }
-
-// Don't forget to add this for panic handling
-// #[wasm_bindgen(start)]
-// pub fn main() {
-//     console_error_panic_hook::set_once();
-// }

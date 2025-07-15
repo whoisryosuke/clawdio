@@ -72,9 +72,7 @@ class MoogWorklet extends AudioWorkletProcessor {
         if (this.worklet == null) return true;
 
         // Process samples using Rust WASM module
-        console.log("moog samples", inputSamples);
         const processing = this.worklet.process(inputSamples);
-        console.log("moog process", processing);
 
         // Make sure you loop through each output value and assign it manually
         // can't just assign a whole array
