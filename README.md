@@ -85,8 +85,8 @@ Then you can create a Rust WASM module that handles processing:
 1. Commit the version change: `git commit -m ":bookmark: v4.2.0"`
 1. Push your changes.
 1. Tag the version change: `git tag v4.2.0`
-1. Push the version change: `git push v4.2.0`
-1. Go to GitHub and create a new release. Selec the tag you just created.
+1. Push the version change: `git push origin v4.2.0`
+1. Go to GitHub and create a new release. Select the tag you just created.
 
 The build and release will automatically run once a release is created. You can track this in the GitHub Actions tab.
 
