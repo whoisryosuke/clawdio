@@ -35,14 +35,17 @@ impl MoogModule {
 
     pub fn process(&mut self, samples: &js_sys::Float32Array) -> js_sys::Float32Array {
         let samples_vec: Vec<f32> = samples.to_vec();
-        let mut output = samples_vec;
+        let output = self.process_vec(samples_vec);
+        js_sys::Float32Array::from(&output[..])
+    }
 
+    pub fn process_vec(&mut self, mut samples: Vec<f32>) -> Vec<f32> {
         let f = (self.cutoff * 1.16).clamp(0.0, 0.99);
         let input_factor = 0.35013 * (f * f) * (f * f);
         let fb = (self.resonance * (1.0 - 0.15 * f * f)).clamp(0.0, 0.95);
 
         // Loop over samples and apply bitcrusher effect
-        for sample in output.iter_mut() {
+        for sample in samples.iter_mut() {
             let mut base = *sample;
             base -= self.out4 * fb;
             base *= input_factor;
@@ -72,6 +75,72 @@ impl MoogModule {
             *sample = self.out4.clamp(-1.0, 1.0);
         }
 
-        js_sys::Float32Array::from(&output[..])
+        samples
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_silence_input() {
+        let mut filter = MoogModule::new(0.5, 0.5);
+        // Generate silence samples
+        let silence = vec![0.0; 128];
+        
+        // Run the filter process
+        let result = filter.process_vec(silence);
+        
+        // Output should be close to zero for zero input
+        for sample in result {
+            assert!(sample.abs() < 0.001, "Sample too large: {}", sample);
+        }
+    }
+
+    #[test]
+    fn test_impulse_response() {
+        let mut filter = MoogModule::new(0.5, 0.1);
+        // Generate a single impulse sample
+        let mut impulse = vec![0.0; 128];
+        impulse[0] = 1.0;
+        
+        let output = filter.process_vec(impulse);
+        
+        // First sample should be non-zero
+        assert!(output[0] != 0.0);
+        // Should decay over time (lowpass behavior)
+        assert!(output[10].abs() < output[0].abs());
+    }
+
+    #[test]
+    fn test_no_nan_or_inf() {
+        let mut filter = MoogModule::new(0.9, 0.9); // High settings
+        // Generate sine wave samples
+        let input_data: Vec<f32> = (0..128).map(|i| (i as f32 * 0.1).sin()).collect();
+        
+        let output = filter.process_vec(input_data);
+        
+        for (i, sample) in output.iter().enumerate() {
+            assert!(sample.is_finite(), "Found NaN or Inf at index {}: {}", i, sample);
+            assert!(sample.abs() < 10.0, "Output too large at index {}: {}", i, sample);
+        }
+    }
+
+    #[test]
+    fn test_stability_over_time() {
+        let mut filter = MoogModule::new(0.7, 0.8);
+        
+        // Process many samples to test long-term stability
+        // Ensures filter decays properly and doesn't go to infinity
+        for _ in 0..10 {
+            let input: Vec<f32> = (0..1024).map(|i| (i as f32 * 0.01).sin()).collect();
+            let output = filter.process_vec(input);
+            
+            // Check last few samples are still reasonable
+            for &sample in output.iter().rev().take(10) {
+                assert!(sample.is_finite() && sample.abs() < 2.0);
+            }
+        }
     }
 }
