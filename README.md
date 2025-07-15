@@ -8,9 +8,19 @@ We leverage the [Audio Worklet API](https://developer.mozilla.org/en-US/docs/Web
 
 This library includes a series of JavaScript modules you can include in your web audio projects to create different effects.
 
+## Effects
+
+- **Bitcrusher** (8-bit effect)
+- **Moog Filter** (Low-pass filter)
+
 ## Features
 
-- Bitcrusher
+- 🎸 **Easy to use**: Super simple API for custom audio nodes
+- ⛓️‍💥 **Zero dependencies**: Pure JS wrappers around Web Audio APIs
+- 🎛️ **Modular**: Use each effect directly (`yarn add clawdio-bitcrusher`)
+- 📦 **WASM**: Leverage WASM for more efficient processing
+- 📑 **Typescript**: Import types like `BitcrusherNode` to make work easier.
+- 🧪 **Tested**: Signal math operations tested for validity
 
 ## Getting Started
 
