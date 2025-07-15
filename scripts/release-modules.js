@@ -1,12 +1,12 @@
 import { execFileSync } from "child_process";
-import { readdirSync } from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
+import { getAllModules } from "./shared.js";
 
 const log = (...props) => console.log("[CLAWDIO/RELEASE]", ...props);
 
 // Get all modules
-const modules = readdirSync("./modules");
+const modules = getAllModules();
 log("Processing Rust modules: ", modules);
 
 function releaseModules() {

@@ -1,5 +1,5 @@
 import { execFileSync } from "child_process";
-import { copyFileSync, readdirSync } from "fs";
+import { getAllModules } from "./shared.js";
 
 /**
  * This file handles building the Rust code into WASM and JS,
@@ -13,8 +13,8 @@ log("Starting build");
 
 // 1️⃣ Build all WASM modules
 
-// Get all modules
-const modules = readdirSync("./modules");
+// Get all modules directories
+const modules = getAllModules();
 log("Processing Rust modules: ", modules);
 
 modules.forEach((moduleName) => {
