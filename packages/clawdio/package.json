@@ -25,11 +25,7 @@
   },
   "dependencies": {
     "clawdio-bitcrusher": "0.1.0",
-    "clawdio-moog": "0.1.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "styled-components": "^6.0.7",
-    "zustand": "^5.0.6"
+    "clawdio-moog": "0.1.0"
   },
   "devDependencies": {
     "commitizen": "^4.3.1",
@@ -49,11 +45,7 @@
     "vite-plugin-dts": "^3.4.0",
     "vite-tsconfig-paths": "^5.1.4"
   },
-  "peerDependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "styled-components": "^6.0.7"
-  },
+  "peerDependencies": {},
   "command": {
     "publish": {
       "conventionalCommits": true
