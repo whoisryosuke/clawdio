@@ -82,12 +82,13 @@ impl MoogModule {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use test_helpers::{generate_silence_samples};
 
     #[test]
     fn test_silence_input() {
         let mut filter = MoogModule::new(0.5, 0.5);
         // Generate silence samples
-        let silence = vec![0.0; 128];
+        let silence = generate_silence_samples();
         
         // Run the filter process
         let result = filter.process_vec(silence);
