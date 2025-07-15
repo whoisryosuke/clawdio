@@ -1,11 +1,8 @@
 import BitcrusherWorklet from "@/workers/bitcrusher.ts?worker&url";
 import "clawdio-bitcrusher/clawdio_bitcrusher_bg.wasm?no-inline";
 import BitcrusherWasmPath from "clawdio-bitcrusher/clawdio_bitcrusher_bg.wasm?url&no-inline";
-import type {
-  AudioWorkletEventMessage,
-  BitcrusherOptions,
-} from "@/workers/types";
 import { CustomAudioWorkletNode } from "./types";
+import { assertNode, createWorkletNode } from "./utils";
 
 export type BitcrusherNode = CustomAudioWorkletNode & {
   setBits: (newBits: number) => void;
@@ -24,62 +21,6 @@ const createBitcrusherNode = async (
 ) => {
   let nodeRef: AudioWorkletNode | null = null;
 
-  const handleNodeMessage = (e: MessageEvent) => {
-    const event = e.data as AudioWorkletEventMessage<number>;
-    // WASM was loaded - so lets initialize our Rust-based pitch detection module
-    if (event.type === "wasm-loaded") {
-      console.log("wasm loaded");
-      if (!nodeRef) return;
-
-      // The config for our underyling Rust module
-      const data: BitcrusherOptions = {
-        bits,
-      };
-
-      console.log("init bitcrusher rust module");
-      // Send the WASM payload to Audio processor
-      nodeRef.port.postMessage({
-        type: "init-module",
-        data,
-      });
-    }
-  };
-
-  const createNode = async () => {
-    // Fetch the WASM module
-    const response = await fetch(BitcrusherWasmPath);
-    const wasmData = await response.arrayBuffer();
-
-    // Create the worklet
-    console.log("creating worklet...", BitcrusherWorklet);
-    try {
-      // Resolve the URL relative to the current module
-      await audioCtx.audioWorklet.addModule(BitcrusherWorklet);
-    } catch (e) {
-      console.log("failed to create module", e);
-    }
-
-    try {
-      nodeRef = new AudioWorkletNode(audioCtx, "bitcrusher");
-
-      // Send the WASM payload to Audio processor
-      nodeRef.port.postMessage({ type: "init-wasm", data: wasmData });
-      // Get messages from the worklet/processor
-      nodeRef.port.onmessage = handleNodeMessage;
-
-      // Set initial values
-      setNormfreq(normfreq);
-
-      console.log("created worklet node", nodeRef);
-
-      nodeRef.addEventListener("processorerror", (e) =>
-        console.error("Audio Worklet processing error", e)
-      );
-    } catch (e) {
-      console.log("failed to create worklet", e);
-    }
-  };
-
   // Setter functions to communicate with worklet params
   const setBits = (newBits: number) => {
     if (!nodeRef) return;
@@ -92,11 +33,18 @@ const createBitcrusherNode = async (
   };
 
   // Create the node and return it
-  await createNode();
+  nodeRef = await createWorkletNode(
+    audioCtx,
+    BitcrusherWasmPath,
+    BitcrusherWorklet,
+    "clawdio-bitcrusher",
+    {
+      bits,
+      normfreq,
+    }
+  );
 
-  if (!nodeRef) {
-    throw "Couldn't create node, try again";
-  }
+  assertNode(nodeRef, "Bitcrusher");
 
   return {
     node: nodeRef,

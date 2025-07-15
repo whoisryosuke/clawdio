@@ -1,35 +1,35 @@
-import init, { BitcrusherModule } from "clawdio-bitcrusher";
+import init, { MoogModule } from "clawdio-moog";
 import type {
   AudioWorkletEventMessage,
   AudioWorkletInitWasmEvent,
 } from "./types";
 import { initWasm } from "./utils";
 
-export interface BitcrusherEventInitModule
-  extends AudioWorkletEventMessage<BitcrusherOptions> {
+export interface MoogEventInitModule
+  extends AudioWorkletEventMessage<MoogOptions> {
   type: "init-module";
-  data: BitcrusherOptions;
+  data: MoogOptions;
 }
 
-export interface BitcrusherEventSetBits
-  extends AudioWorkletEventMessage<number> {
-  type: "set-bits";
+export interface MoogEventSetCutoff extends AudioWorkletEventMessage<number> {
+  type: "set-cutoff";
   data: number;
 }
-export interface BitcrusherEventSetNormfreq
+export interface MoogEventSetResonance
   extends AudioWorkletEventMessage<number> {
-  type: "set-normfreq";
+  type: "set-resonance";
   data: number;
 }
 
-export type BitcrusherOptions = {
-  bits: number;
+export type MoogOptions = {
+  cutoff: number;
+  resonance: number;
 };
 
-class BitcrusherWorklet extends AudioWorkletProcessor {
-  worklet: BitcrusherModule | null = null;
-  bits = 4;
-  normfreq = 0.1;
+class MoogWorklet extends AudioWorkletProcessor {
+  worklet: MoogModule | null = null;
+  cutoff = 0.065;
+  resonance = 3.5;
 
   constructor() {
     super();
@@ -40,26 +40,25 @@ class BitcrusherWorklet extends AudioWorkletProcessor {
   onmessage = (
     event:
       | AudioWorkletInitWasmEvent
-      | BitcrusherEventInitModule
-      | BitcrusherEventSetBits
-      | BitcrusherEventSetNormfreq
+      | MoogEventInitModule
+      | MoogEventSetCutoff
+      | MoogEventSetResonance
   ) => {
     // Handle loading WASM module
     initWasm(event as AudioWorkletInitWasmEvent, init, this.port);
 
     if (event.type === "init-module") {
-      const { bits } = event.data;
-      this.bits = bits;
-      this.worklet = BitcrusherModule.new(bits);
+      const { cutoff = 0.065, resonance = 3.5 } = event.data;
+      this.worklet = MoogModule.new(cutoff, resonance);
     }
 
     // Setters for internal properties (since we can't mutate this directly)
-    if (event.type === "set-bits") {
-      this.bits = event.data;
+    if (event.type === "set-cutoff") {
+      this.cutoff = event.data;
       // @TODO: Update the underylinng module
     }
-    if (event.type === "set-normfreq") {
-      this.normfreq = event.data;
+    if (event.type === "set-resonance") {
+      this.resonance = event.data;
     }
   };
 
@@ -73,7 +72,9 @@ class BitcrusherWorklet extends AudioWorkletProcessor {
         if (this.worklet == null) return true;
 
         // Process samples using Rust WASM module
-        const processing = this.worklet.process(inputSamples, this.normfreq);
+        console.log("moog samples", inputSamples);
+        const processing = this.worklet.process(inputSamples);
+        console.log("moog process", processing);
 
         // Make sure you loop through each output value and assign it manually
         // can't just assign a whole array
@@ -89,4 +90,4 @@ class BitcrusherWorklet extends AudioWorkletProcessor {
   }
 }
 
-registerProcessor("bitcrusher", BitcrusherWorklet);
+registerProcessor("clawdio-moog", MoogWorklet);
