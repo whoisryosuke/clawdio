@@ -89,4 +89,4 @@ class BitcrusherWorklet extends AudioWorkletProcessor {
   }
 }
 
-registerProcessor("bitcrusher", BitcrusherWorklet);
+registerProcessor("clawdio-bitcrusher", BitcrusherWorklet);
