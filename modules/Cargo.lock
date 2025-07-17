@@ -35,9 +35,17 @@ dependencies = [
 name = "clawdio-pink-noise"
 version = "0.1.0"
 dependencies = [
+ "clawdio-shared",
  "js-sys",
  "test-helpers",
  "wasm-bindgen",
+]
+
+[[package]]
+name = "clawdio-shared"
+version = "0.1.0"
+dependencies = [
+ "test-helpers",
 ]
 
 [[package]]

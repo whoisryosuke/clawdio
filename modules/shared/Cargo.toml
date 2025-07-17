@@ -1,16 +1,11 @@
 [package]
-name = "clawdio-pink-noise"
+name = "clawdio-shared"
 version = "0.1.0"
 authors = ["Ryosuke Hana"]
 edition = "2021"
 
 [lib]
 crate-type = ["cdylib", "rlib"]
-
-[dependencies]
-js-sys = "0.3.77"
-wasm-bindgen = "0.2.100"
-shared = { package ="clawdio-shared", path = "../shared" }
 
 [dev-dependencies]
 test-helpers = { path = "../test-helpers" }

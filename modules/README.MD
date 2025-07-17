@@ -41,6 +41,8 @@ Run tests using `cargo test`. You can run it in the root `/modules/` directory t
 
 You can import functions from the `test-helpers` crate to assist in testing - such as generating mock sample data.
 
+> Testing is vital for this library because of the context in which the WASM runs. Since we use WASM in `AudioWorkletProcessor`, we don't have access to debug logs due to lack of `TextEncoder` API, which would normally be accessible via `console_error_panic_hook` crate in WASM workflows. Due to this, validating the WASM code at multiple levels is required.
+
 ## Using code
 
 1. Go into [the `package.json` for the `clawdio` library](packages\clawdio\package.json) and add your new Rust module as a dependency. Make sure it matches the version in your `Cargo.toml` file - or just use `*` to signify "the latest version".
