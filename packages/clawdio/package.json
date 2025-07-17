@@ -25,7 +25,8 @@
   },
   "dependencies": {
     "clawdio-bitcrusher": "0.1.0",
-    "clawdio-moog": "0.1.0"
+    "clawdio-moog": "0.1.0",
+    "clawdio-pink-noise": "0.1.0"
   },
   "devDependencies": {
     "commitizen": "^4.3.1",

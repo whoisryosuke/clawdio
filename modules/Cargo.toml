@@ -2,7 +2,8 @@
 members = [
     "test-helpers", 
     "bitcrusher",
-    "moog"
+    "moog",
+    "pink-noise"
 ]
 resolver = "2"
 

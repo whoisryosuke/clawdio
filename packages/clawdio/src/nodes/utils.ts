@@ -27,6 +27,15 @@ export const createWorkletNode = async (
   // Fetch the WASM module
   const response = await fetch(wasmPath);
   const wasmData = await response.arrayBuffer();
+  console.log("got wasm", response, wasmData);
+
+  const contentLength = response.headers.get("content-length");
+
+  // If the header exists, parse it as an integer
+  if (contentLength) {
+    const fileSize = parseInt(contentLength, 10);
+    console.log(`file size in bytes`, fileSize); // Size in bytes
+  }
 
   // Create the worklet
   console.log("creating worklet...", worklet);
