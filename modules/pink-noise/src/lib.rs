@@ -1,5 +1,22 @@
-use rand::Rng;
 use wasm_bindgen::prelude::*;
+
+struct SimpleRng {
+    state: u64,
+}
+
+impl SimpleRng {
+    fn new(seed: u64) -> Self {
+        Self { state: seed }
+    }
+    
+    fn random(&mut self) -> f32 {
+        // Simple LCG constants
+        self.state = self.state.wrapping_mul(1103515245).wrapping_add(12345);
+        // Convert to float between -1 and 1
+        let normalized = (self.state as f32) / (u64::MAX as f32);
+        normalized * 2.0 - 1.0
+    }
+}
 
 #[wasm_bindgen]
 pub struct PinkNoiseModule {
@@ -36,11 +53,11 @@ impl PinkNoiseModule {
     }
 
     pub fn process_vec(&mut self) -> Vec<f32> {
-        let mut rng = rand::thread_rng();
+        let mut rng = SimpleRng::new(0);
 
         let mut samples: Vec<f32> = Vec::new();
         for _ in 0..self.buffer_size {
-            let white_noise: f32 = rng.gen_range(-1.0..=1.0);
+            let white_noise: f32 = rng.random();
             self.b0 = 0.99886 * self.b0 + white_noise * 0.0555179;
             self.b1 = 0.99332 * self.b1 + white_noise * 0.0750759;
             self.b2 = 0.96900 * self.b2 + white_noise * 0.1538520;

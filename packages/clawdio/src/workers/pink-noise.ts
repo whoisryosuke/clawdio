@@ -33,8 +33,10 @@ class PinkNoiseWorklet extends AudioWorkletProcessor {
       const { bufferSize = 4096 } = event.data;
       this.worklet = PinkNoiseModule.new(bufferSize);
 
+      console.log("wasm initialized - test process", this.worklet.process_vec);
+
       console.log(
-        "wasm initialized - test process",
+        "wasm initialized - test process function",
         this.worklet.process_vec()
       );
     }

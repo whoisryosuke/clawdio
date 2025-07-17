@@ -11,10 +11,5 @@ crate-type = ["cdylib", "rlib"]
 js-sys = "0.3.77"
 wasm-bindgen = "0.2.100"
 
-rand = "0.8"
-# Required by rand for WASM output
-getrandom = { version = "0.2", features = ["js"] }
-
-
 [dev-dependencies]
 test-helpers = { path = "../test-helpers" }
