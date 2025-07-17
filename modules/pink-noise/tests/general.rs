@@ -45,3 +45,17 @@ fn test_threshold() {
         assert!(sample.abs() < 1.0, "Shouldn't be greater than -1 to 1 range: {}", sample.abs());
     }
 }
+
+/**
+ * Check if noise is different
+ */
+#[test]
+fn test_randomness() {
+    let mut filter = PinkNoiseModule::new(4096);
+    
+    // Run the filter process
+    let result = filter.process_vec();
+
+    assert!(result[0] != result[1], "Numbers should be different");
+    
+}

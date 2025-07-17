@@ -20,6 +20,7 @@ impl SimpleRng {
 
 #[wasm_bindgen]
 pub struct PinkNoiseModule {
+    rng: SimpleRng,
     buffer_size: i32,
 
     // Input and output
@@ -36,6 +37,7 @@ pub struct PinkNoiseModule {
 impl PinkNoiseModule {
     pub fn new(buffer_size: i32) -> PinkNoiseModule {
         PinkNoiseModule {
+            rng: SimpleRng::new(0),
             buffer_size,
             b0: 0.0,
             b1: 0.0,
@@ -53,11 +55,9 @@ impl PinkNoiseModule {
     }
 
     pub fn process_vec(&mut self) -> Vec<f32> {
-        let mut rng = SimpleRng::new(0);
-
         let mut samples: Vec<f32> = Vec::new();
         for _ in 0..self.buffer_size {
-            let white_noise: f32 = rng.random();
+            let white_noise: f32 = self.rng.random();
             self.b0 = 0.99886 * self.b0 + white_noise * 0.0555179;
             self.b1 = 0.99332 * self.b1 + white_noise * 0.0750759;
             self.b2 = 0.96900 * self.b2 + white_noise * 0.1538520;

@@ -32,13 +32,6 @@ class PinkNoiseWorklet extends AudioWorkletProcessor {
     if (event.type === "init-module") {
       const { bufferSize = 4096 } = event.data;
       this.worklet = PinkNoiseModule.new(bufferSize);
-
-      console.log("wasm initialized - test process", this.worklet.process_vec);
-
-      console.log(
-        "wasm initialized - test process function",
-        this.worklet.process_vec()
-      );
     }
   };
 
@@ -53,8 +46,6 @@ class PinkNoiseWorklet extends AudioWorkletProcessor {
     } catch (e) {
       console.log("processing error", e);
     }
-
-    console.log("processed audio", processing);
 
     if (!processing) return true;
     // Make sure you loop through each output value and assign it manually
