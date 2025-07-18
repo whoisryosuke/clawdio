@@ -52,15 +52,6 @@ class PinkNoiseWorklet extends AudioWorkletProcessor {
     // can't just assign a whole array
     processing.forEach((val, index) => (outputs[0][0][index] = val));
 
-    // outputs.forEach((channels, channelIndex) => {
-    //   channels.forEach((_, sampleIndex) => {
-    //     // We check again since TS insists (and maybe it changes over course of loop?)
-    //     if (this.worklet == null) return true;
-    //   });
-    // });
-
-    // outputs = inputs;
-
     return true;
   }
 }
