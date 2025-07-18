@@ -12,6 +12,7 @@ This library includes a series of JavaScript modules you can include in your web
 
 - **Bitcrusher** (8-bit effect)
 - **Moog Filter** (Low-pass filter)
+- **Pink Noise** (Procedural noise)
 
 ## Features
 
@@ -25,13 +26,29 @@ This library includes a series of JavaScript modules you can include in your web
 ## Getting Started
 
 1. Install the library: `npm install clawdio`
-1. Import the worklet for the effect you need and use it!: `import { createBitcrusherNode } from 'clawdio'`
+1. Import the worklet node for the effect you need and use it! Each worklet node function returns an object with an `node` property containing the `AudioWorkletNode` you want.
 
-Check the [example app](packages\examples\src\components\Bitcrusher\BitcrusherExample.tsx) on how to use each module. Documentation is coming soon!
+```tsx
+const context = new AudioContext();
+const oscillatorNode = context.createOscillator();
+
+const createBitcrusherWorklet = async (id: string) => {
+  // Create the node using our helper function
+  const bitcrusher = await createBitcrusherNode(context, 4, 0.1);
+
+  // Connect the node
+  oscillatorNode.connect(bitcrusher.node);
+  bitcrusher.node.connect(context.destination);
+};
+
+await createBitcrusherWorklet();
+```
+
+Check the [example app](packages\examples\src\components\) for examples for each module. _Better documentation is coming soon!_
 
 ### Using WASM directly
 
-If you want greater control over the WASM, you can import each WASM module directly.
+If you want greater control over the WASM, you can import each WASM module directly. They're each individually released to NPM alongside the main library.
 
 For example the Bitcrusher node would be: `yarn add clawdio-bitcrusher`
 
@@ -51,11 +68,11 @@ This project includes both Typescript frontend code for each Audio Worklet, and 
 
 This library exports audio worklets to use in the Web Audio API.
 
-**Rust WASM** modules go inside `/modules/` folder. Each module should be self-contained and able to build itself using `wasm-pack`. This is based off the [rust-wasm-library-template](https://github.com/whoisryosuke/rust-wasm-library-template).
+**Rust WASM** modules go inside `/modules/` folder. Each module should be self-contained and able to build itself using `wasm-pack`. Each module is based off the [rust-wasm-library-template](https://github.com/whoisryosuke/rust-wasm-library-template). The whole folder itself is a monorepo, allowing for sharing code between modules if needed. Find more info [in the README there](modules\README.MD).
 
 **Frontend JS** code goes in `/packages/clawdio/src/` folder. Export any functions, components, etc using the `index.ts` file. This gets distributed to NPM. This based off [react-vite-library-boilerplate](https://github.com/whoisryosuke/react-vite-library-boilerplate).
 
-> The library code is packaged together, but each WASM module is bundled and fetched individually to reduce the library size. You can also install each Rust module individually and use them directly if desired.
+> The library code is packaged together into one file (e.g. `clawdio.es.js`), but each worklet and WASM module are bundled and fetched individually to reduce the library size. You can also install each Rust module individually and use them directly if desired.
 
 ### Creating new worklet
 
@@ -69,10 +86,16 @@ Then you can create a Rust WASM module that handles processing:
 1. Create a new module inside `/modules/` folder, ideally just copy an existing effect.
 1. Change the module name in the `Cargo.toml` to be `clawdio-youreffectname`.
 1. Write any Rust code.
-1. Build the modules: `yarn build:modules`
+1. Build all the modules: `yarn build:modules` or the individual module using `wasm-pack build --target web`
 1. You should see a `/pkg` folder inside the `/modules/yourmodule/` with the WASM.
-1. Install the Rust module as a dependency to the `clawdio` project. Use the `*` as version to ensure it sources locally.
+1. Install the Rust module as a dependency to the `clawdio` project. Use the latest version or `*` as version to ensure it sources locally.
 1. Try using the Rust module in the frontend code.
+
+### Debugging Tips
+
+- You cannot use `println!()` or any kind of debug log statements in the WASM bundle because of the lack of `TextEncoder` in the worker's JS context.
+- Try loading the WASM module in isolation - outside of the audio worklet. This ensures worklet is broken, and not just using restricted APIs in worklet context (like `crypto`). I like spinning up a fresh Vite app and just linking (`yarn link`) the any specific modules over.
+- Your order of operation should be: create Rust tests to validate module, integration test with WASM in worklet, then end to end test in a frontend app.
 
 ### Building
 
@@ -96,6 +119,7 @@ This publishes the main [`clawdio`](https://www.npmjs.com/package/clawdio) libra
 
 ## References
 
+- [Web Audio Effect Library with Rust and WASM](https://whoisryosuke.com/blog/2025/web-audio-effect-library-with-rust-and-wasm)
 - [Processing Web Audio with Rust and WASM](https://whoisryosuke.com/blog/2025/processing-web-audio-with-rust-and-wasm)
 - [rust-wasm-library-template](https://github.com/whoisryosuke/rust-wasm-library-template)
 - [react-vite-library-boilerplate](https://github.com/whoisryosuke/react-vite-library-boilerplate)
