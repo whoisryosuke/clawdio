@@ -45,7 +45,7 @@ You can import functions from the `test-helpers` crate to assist in testing - su
 
 ### Visual Testing
 
-![Chart with line graph depicting audio waveform of pink noise](modules/pink-noise/tests/__snapshots__/pink_noise_test.png)
+![Chart with line graph depicting audio waveform of pink noise](pink-noise/tests/__snapshots__/pink_noise_test.png)
 
 To visualize your audio signal, you can plot your samples on a graph using the `plot_waveform()` function in the `test_helpers` crate. For the samples, it accepts a `Vec` of integers from `-1` to `1` (technically to `+/-1.5` but that's only to check for clipping).
 
