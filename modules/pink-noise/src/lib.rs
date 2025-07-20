@@ -1,5 +1,5 @@
-use wasm_bindgen::prelude::*;
 use shared::SimpleRng;
+use wasm_bindgen::prelude::*;
 
 #[wasm_bindgen]
 pub struct PinkNoiseModule {
