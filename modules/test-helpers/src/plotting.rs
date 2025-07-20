@@ -1,5 +1,9 @@
 #[cfg(feature = "viz")]
 use plotters::prelude::*;
+use std::path::Path;
+use std::fs;
+
+const SNAPSHOT_FOLDER_PATH: &'static str = "tests/__snapshots__";
 
 // Plotting function
 #[cfg(feature = "viz")]
@@ -11,9 +15,23 @@ pub fn plot_waveform(
     title: &str,
 ) -> Result<(), Box<dyn std::error::Error>> {
 
-    let root = BitMapBackend::new(filename, (800, 600)).into_drawing_area();
+    // Create snapshots directory in local folder
+    let snapshot_path = Path::new(SNAPSHOT_FOLDER_PATH);
+    if !&snapshot_path.exists() {
+        println!("no folder found");
+
+        fs::create_dir(SNAPSHOT_FOLDER_PATH)?;
+    }
+
+    // Append filename to the snapshot folder
+    let filepath = snapshot_path.clone().join(filename);
+    let filepath_string = filepath.to_str().unwrap();
+
+    // Create the backend for drawing
+    let root = BitMapBackend::new(filepath_string, (800, 600)).into_drawing_area();
     root.fill(&WHITE)?;
 
+    // Map samples to a linear graph where horizontal is time (aka duration)
     let duration = samples.len() as f64 / sample_rate as f64;
     let time_points: Vec<(f64, f64)> = samples
         .iter()
@@ -21,6 +39,7 @@ pub fn plot_waveform(
         .map(|(i, &sample)| (i as f64 / sample_rate as f64, sample as f64))
         .collect();
 
+    // Build the chart
     let mut chart = ChartBuilder::on(&root)
         .caption(title, ("sans-serif", 40).into_font())
         .margin(20)
@@ -34,6 +53,7 @@ pub fn plot_waveform(
         .y_desc("Amplitude")
         .draw()?;
 
+    // Plot points on graph/chart
     chart.draw_series(LineSeries::new(time_points, &BLUE))?;
 
     root.present()?;
