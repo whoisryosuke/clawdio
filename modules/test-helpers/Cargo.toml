@@ -4,3 +4,10 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
+plotters = {version = "0.3.7", optional = true}
+
+[dev-dependencies]
+plotters = "0.3.7"
+
+[features]
+viz = ["plotters"]

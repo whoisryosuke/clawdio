@@ -7,7 +7,3 @@ members = [
     "pink-noise"
 ]
 resolver = "2"
-
-[workspace.dependencies]
-js-sys = "0.3.77"
-wasm-bindgen = "0.2.100"
