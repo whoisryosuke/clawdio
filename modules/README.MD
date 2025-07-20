@@ -43,6 +43,21 @@ You can import functions from the `test-helpers` crate to assist in testing - su
 
 > Testing is vital for this library because of the context in which the WASM runs. Since we use WASM in `AudioWorkletProcessor`, we don't have access to debug logs due to lack of `TextEncoder` API, which would normally be accessible via `console_error_panic_hook` crate in WASM workflows. Due to this, validating the WASM code at multiple levels is required.
 
+### Visual Testing
+
+To visualize your audio signal, you can plot your samples on a graph using the `plot_waveform()` function in the `test_helpers` crate. For the samples, it accepts a `Vec` of integers from `-1` to `1` (technically to `+/-1.5` but that's only to check for clipping).
+
+```rust
+plot_waveform(&samples, (NUM_SAMPLES as f32), "test_file_name.png", "Test Name")
+    .expect("Failed to create plot");
+```
+
+This generates a chart with a line graph based on your sample data and places it relatively inside the `/tests/__snapshots__/` folder as a `.png` file.
+
+You should commit these tests so other developers can validate changes they make haven't effected the output of any existing functions.
+
+> See a full example inside a test [here in the Pink Noise module](modules\pink-noise\tests\general.rs).
+
 ## Using code
 
 1. Go into [the `package.json` for the `clawdio` library](packages\clawdio\package.json) and add your new Rust module as a dependency. Make sure it matches the version in your `Cargo.toml` file - or just use `*` to signify "the latest version".
@@ -59,6 +74,22 @@ You can also just install this in another app if you want to test it in isolatio
 1. Go into build folder: `cd pkg`
 1. Create a link to the module: `yarn link`
 1. Go into another JS project (like a new Vite project) and link the module: `yarn link clawdio-modulename`
+1. Import the module, initialize the WASM, and then initialize the underlying `struct` and check for any public functions you created.
+
+```ts
+import init, { PinkNoiseModule } from "clawdio-pink-noise";
+
+const createWASM = async () => {
+  await init();
+
+  const worklet = PinkNoiseModule.new(4096);
+
+  console.log("worklet", worklet);
+  console.log("worklet", worklet.process_vec, worklet.process_vec());
+};
+
+createWASM();
+```
 
 # References
 
