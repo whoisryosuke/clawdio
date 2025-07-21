@@ -44,7 +44,7 @@ const createBitcrusherWorklet = async (id: string) => {
 await createBitcrusherWorklet();
 ```
 
-Check the [example app](packages\examples\src\components\) for examples for each module. _Better documentation is coming soon!_
+Check the [example app](packages/examples/src/components/) for examples for each module. _Better documentation is coming soon!_
 
 ### Using WASM directly
 
@@ -52,7 +52,7 @@ If you want greater control over the WASM, you can import each WASM module direc
 
 For example the Bitcrusher node would be: `yarn add clawdio-bitcrusher`
 
-You can find an example of how to use it [in the library code](packages\clawdio\src\nodes\BitcrusherNode.ts).
+You can find an example of how to use it [in the library code](packages/clawdio/src/nodes/BitcrusherNode.ts).
 
 ## Development
 
@@ -68,7 +68,7 @@ This project includes both Typescript frontend code for each Audio Worklet, and 
 
 This library exports audio worklets to use in the Web Audio API.
 
-**Rust WASM** modules go inside `/modules/` folder. Each module should be self-contained and able to build itself using `wasm-pack`. Each module is based off the [rust-wasm-library-template](https://github.com/whoisryosuke/rust-wasm-library-template). The whole folder itself is a monorepo, allowing for sharing code between modules if needed. Find more info [in the README there](modules\README.MD).
+**Rust WASM** modules go inside `/modules/` folder. Each module should be self-contained and able to build itself using `wasm-pack`. Each module is based off the [rust-wasm-library-template](https://github.com/whoisryosuke/rust-wasm-library-template). The whole folder itself is a monorepo, allowing for sharing code between modules if needed. Find more info [in the README there](modules/README.MD).
 
 **Frontend JS** code goes in `/packages/clawdio/src/` folder. Export any functions, components, etc using the `index.ts` file. This gets distributed to NPM. This based off [react-vite-library-boilerplate](https://github.com/whoisryosuke/react-vite-library-boilerplate).
 
