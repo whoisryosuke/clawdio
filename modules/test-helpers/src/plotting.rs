@@ -27,7 +27,7 @@ use plotters::style::full_palette::{GREY_600, GREY_400, GREY_800, GREY_900};
     }
 
     // Append filename to the snapshot folder
-    let filepath = snapshot_path.clone().join(filename);
+    let filepath = snapshot_path.join(filename);
     let filepath_string = filepath.to_str().unwrap();
 
     // Create the backend for drawing
