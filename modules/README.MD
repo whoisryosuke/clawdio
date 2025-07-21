@@ -47,6 +47,13 @@ You can import functions from the `test-helpers` crate to assist in testing - su
 
 ![Chart with line graph depicting audio waveform of pink noise](pink-noise/tests/__snapshots__/pink_noise_test.png)
 
+First make sure the Rust module is setup correctly. It should have `test-helpers` as a dev dependency with the `viz` feature enabled:
+
+```toml
+[dev-dependencies]
+test-helpers = { path = "../test-helpers", features = ["viz"] }
+```
+
 To visualize your audio signal, you can plot your samples on a graph using the `plot_waveform()` function in the `test_helpers` crate. For the samples, it accepts a `Vec` of integers from `-1` to `1` (technically to `+/-1.5` but that's only to check for clipping).
 
 ```rust
@@ -58,15 +65,15 @@ This generates a chart with a line graph based on your sample data and places it
 
 You should commit these tests so other developers can validate changes they make haven't effected the output of any existing functions.
 
-> See a full example inside a test [here in the Pink Noise module](modules\pink-noise\tests\general.rs).
+> See a full example inside a test [here in the Pink Noise module](modules/pink-noise/tests/general.rs).
 
 ## Using code
 
-1. Go into [the `package.json` for the `clawdio` library](packages\clawdio\package.json) and add your new Rust module as a dependency. Make sure it matches the version in your `Cargo.toml` file - or just use `*` to signify "the latest version".
+1. Go into [the `package.json` for the `clawdio` library](packages/clawdio/package.json) and add your new Rust module as a dependency. Make sure it matches the version in your `Cargo.toml` file - or just use `*` to signify "the latest version".
 1. Run `yarn` to sync the new module.
 1. Try using the module!
 
-For testing the code in a browser, [check out the `/packages/examples/` project.](packages\examples)
+For testing the code in a browser, [check out the `/packages/examples/` project.](packages/examples)
 
 ### Quick Debug
 
