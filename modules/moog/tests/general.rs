@@ -58,7 +58,7 @@ fn test_signal_effect() {
         &output,
         &original,
         num_samples as f32,
-        "Moog Test - Sine Wave",
+        "Moog Test - Comparison (Sine)",
     )
     .expect("Failed to create plot");
 }
