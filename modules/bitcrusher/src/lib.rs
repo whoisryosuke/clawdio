@@ -20,7 +20,14 @@ impl BitcrusherModule {
         // console::log_1(&"Processing in Rust".into());
 
         let samples_vec: Vec<f32> = samples.to_vec();
-        let mut output = samples_vec; 
+
+        let output = self.process_vec(samples_vec, normfreq);
+
+        js_sys::Float32Array::from(&output[..])
+    }
+    
+    pub fn process_vec(&mut self, samples: Vec<f32>, normfreq: f32) -> Vec<f32> {
+        let mut output = samples; 
         
         let step = 0.5_f32.powf(self.bits as f32);
 
@@ -34,7 +41,7 @@ impl BitcrusherModule {
             *sample = self.last.clone();
         }
 
-        js_sys::Float32Array::from(&output[..])
+        output
     }
 }
 
