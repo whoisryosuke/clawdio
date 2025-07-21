@@ -93,6 +93,7 @@ name = "clawdio-bitcrusher"
 version = "0.1.0"
 dependencies = [
  "js-sys",
+ "test-helpers",
  "wasm-bindgen",
 ]
 
