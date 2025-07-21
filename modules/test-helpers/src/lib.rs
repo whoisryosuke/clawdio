@@ -1,3 +1,4 @@
+pub mod signal;
 #[cfg(any(test, feature = "viz"))]
 pub mod plotting;
 

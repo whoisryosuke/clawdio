@@ -1,5 +1,5 @@
 use clawdio_moog::MoogModule;
-use test_helpers::{generate_silence_samples};
+use test_helpers::{generate_silence_samples, signal::generate_sine_wave, plotting::plot_waveform};
 
 #[test]
 fn test_silence_input() {
@@ -43,6 +43,22 @@ fn test_no_nan_or_inf() {
         assert!(sample.is_finite(), "Found NaN or Inf at index {}: {}", i, sample);
         assert!(sample.abs() < 10.0, "Output too large at index {}: {}", i, sample);
     }
+}
+
+#[test]
+fn test_signal_effect() {
+    let num_samples = 1024;
+    let mut filter = MoogModule::new(0.7, 0.8);
+    let input = generate_sine_wave(num_samples);
+    let output = filter.process_vec(input);
+
+    // Visualize signal
+    plot_waveform(
+        &output,
+        num_samples as f32,
+        "Moog Test - Sine Wave",
+    )
+    .expect("Failed to create plot");
 }
 
 #[test]

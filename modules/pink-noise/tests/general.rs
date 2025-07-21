@@ -21,8 +21,7 @@ fn test_signal() {
     // Visualize signal
     plot_waveform(
         &result,
-        (NUM_SAMPLES as f32),
-        "pink_noise_test.png",
+        NUM_SAMPLES as f32,
         "Pink Noise Test",
     )
     .expect("Failed to create sine wave plot");

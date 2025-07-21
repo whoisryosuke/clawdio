@@ -11,7 +11,6 @@ pub fn plot_waveform(
     samples: &[f32],
 
     sample_rate: f32,
-    filename: &str,
     title: &str,
 ) -> Result<(), Box<dyn std::error::Error>> {
 
@@ -27,6 +26,8 @@ use plotters::style::full_palette::{GREY_600, GREY_400, GREY_800, GREY_900};
     }
 
     // Append filename to the snapshot folder
+    let mut filename = title.to_lowercase().replace(" ", "_");
+    filename.push_str(".png");
     let filepath = snapshot_path.join(filename);
     let filepath_string = filepath.to_str().unwrap();
 
