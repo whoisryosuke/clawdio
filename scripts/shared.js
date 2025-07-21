@@ -2,7 +2,7 @@ import { readdirSync, statSync } from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 
-const IGNORE_DIRS = ["test-helpers", "target"];
+const IGNORE_DIRS = ["test-helpers", "target", "shared"];
 
 export const getAllModules = () =>
   readdirSync("./modules")
