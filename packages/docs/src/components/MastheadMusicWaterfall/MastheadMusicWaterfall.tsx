@@ -1,5 +1,6 @@
 import useAudioStore from "@site/src/store/audio";
 import React, { useEffect } from "react";
+import WaterfallViz from "./WaterfallViz";
 
 type Props = {};
 
@@ -11,6 +12,9 @@ const MastheadMusicWaterfall = (props: Props) => {
   useEffect(() => {
     if (!context) {
       const audioCtx = new AudioContext();
+      audioCtx.resume();
+
+      console.log("audioCtx", audioCtx.state);
       setContext(audioCtx);
     }
     return () => {
@@ -24,6 +28,7 @@ const MastheadMusicWaterfall = (props: Props) => {
 
     // Create audio nodes
     const osc = context.createOscillator();
+    osc.start();
     const analyser = context.createAnalyser();
     analyser.fftSize = 1024;
 
@@ -35,7 +40,11 @@ const MastheadMusicWaterfall = (props: Props) => {
     setChain(["osc", "analyser"]);
   }, [context]);
 
-  return <div></div>;
+  return (
+    <div>
+      <WaterfallViz />
+    </div>
+  );
 };
 
 export default MastheadMusicWaterfall;

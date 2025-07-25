@@ -1,26 +1,20 @@
 import { type ComponentProps, useCallback, useEffect, useRef } from "react";
-import styled from "@emotion/styled";
-import { useColorMode, useColorModeValue } from "../color-mode";
 import map from "../../utils/map";
+import { useColorMode } from "@docusaurus/theme-common";
+import useAudioStore from "@site/src/store/audio";
 
 // Assuming numbers are 0-1
 type GraphData = number[];
 const DEFAULT_AUDIO_HEIGHT = 128;
 
 type Props = {
-  analyser: AnalyserNode;
   animated?: boolean;
   color?: string;
   fps?: number;
 };
 
-const LineGraph = ({
-  analyser,
-  animated,
-  color = "blue",
-  fps,
-  ...props
-}: Props) => {
+const WaterfallViz = ({ animated, color = "blue", fps, ...props }: Props) => {
+  const nodes = useAudioStore((state) => state.nodes);
   const { colorMode } = useColorMode();
   const bgColor = colorMode === "dark" ? "#111" : "#EEE";
   const lineColor = colorMode === "dark" ? "blue" : "blue";
@@ -30,6 +24,8 @@ const LineGraph = ({
     null
   );
   const prevTime = useRef(0);
+
+  const analyser = nodes.get("analyser") as AnalyserNode | null;
 
   const draw = useCallback(
     (now: number) => {
@@ -111,4 +107,4 @@ const LineGraph = ({
   return <canvas ref={canvasRef} {...props} />;
 };
 
-export default LineGraph;
+export default WaterfallViz;
