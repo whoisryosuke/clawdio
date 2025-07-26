@@ -13,12 +13,14 @@ type Props = {
 
 // We take the canvas width and divide it by this number
 // to determine the number of lines on screen (lower = more lines, higher = less lines)
-const LINE_DIVISOR = 100;
+const LINE_DIVISOR = 50;
+const CLAWDIO_BRAND = "#BC2F2F";
+const CLAWDIO_LINE = "#711C1C";
 
 const WaterfallViz = ({ data, ...props }: Props) => {
   const { colorMode } = useColorMode();
-  const bgColor = colorMode === "dark" ? "#111" : "#EEE";
-  const lineColor = colorMode === "dark" ? "blue" : "blue";
+  const bgColor = colorMode === "dark" ? "#0C0C0D" : "#EEE";
+  const lineColor = colorMode === "dark" ? "#2E2E32" : "#2E2E32";
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   const draw = useCallback(() => {
@@ -36,9 +38,14 @@ const WaterfallViz = ({ data, ...props }: Props) => {
     ctx.fillStyle = bgColor;
     ctx.fillRect(0, 0, canvasWidth, canvasHeight);
 
+    const gradient = ctx.createLinearGradient(0, 0, 0, canvasHeight); // Gradient from (0,0) to (200,0)
+    gradient.addColorStop(0, lineColor); // Start color
+    gradient.addColorStop(0.5, lineColor); // Middle color
+    gradient.addColorStop(1, CLAWDIO_LINE); // End color
+
     ctx.beginPath();
     ctx.lineWidth = 1.5;
-    ctx.strokeStyle = lineColor;
+    ctx.strokeStyle = gradient;
 
     for (
       let lineIndex = 0;
