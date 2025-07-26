@@ -1,6 +1,7 @@
 import { type ComponentProps, useCallback, useEffect, useRef } from "react";
 import map from "../../utils/map";
 import { useColorMode } from "@docusaurus/theme-common";
+import lerp from "@site/src/utils/lerp";
 
 // Assuming numbers are 0-1
 type GraphData = number[];
@@ -9,6 +10,10 @@ const DEFAULT_AUDIO_HEIGHT = 1;
 type Props = {
   data: GraphData;
 };
+
+// We take the canvas width and divide it by this number
+// to determine the number of lines on screen (lower = more lines, higher = less lines)
+const LINE_DIVISOR = 100;
 
 const WaterfallViz = ({ data, ...props }: Props) => {
   const { colorMode } = useColorMode();
@@ -35,13 +40,32 @@ const WaterfallViz = ({ data, ...props }: Props) => {
     ctx.lineWidth = 1.5;
     ctx.strokeStyle = lineColor;
 
-    for (let lineIndex = 0; lineIndex < canvasWidth / 100; lineIndex++) {
-      for (let i = 0; i < canvasWidth; i++) {
-        const index = Math.floor(map(i, 0, canvasHeight, 0, data.length));
+    for (
+      let lineIndex = 0;
+      lineIndex < (canvasWidth * 2) / LINE_DIVISOR;
+      lineIndex++
+    ) {
+      for (let i = 0; i < canvasHeight; i++) {
+        const index =
+          Math.floor(map(i, 0, canvasHeight, 0, data.length / 2)) * 2;
+        const effectedValue = data[index + 1];
+        const normalValue = data[index];
+        const currentValue = lerp(
+          normalValue,
+          effectedValue,
+          i / canvasHeight - 0.5
+        );
+
         const y = i;
         // We scale the audio values to 0-1 to make it easier
-        const amplitude = map(data[index], -1, 1, 0, 1);
-        const x = (amplitude * canvasWidth) / 2 + lineIndex * 100;
+        const amplitude = map(currentValue, -1, 1, 0, 1);
+        const scaleAmplitude = 42;
+        const scaledAmplitude = amplitude * scaleAmplitude;
+        // Shifts to the left to fill in screen more (since we have double the lines we need anyway)
+        const offset = canvasWidth / 1.5;
+        // Distance between each line
+        const lineOffset = lineIndex * LINE_DIVISOR;
+        const x = scaledAmplitude / 2 + lineOffset - offset;
         if (i === 0) {
           ctx.moveTo(x, y);
         } else {

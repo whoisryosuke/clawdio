@@ -6,11 +6,13 @@ type Props = {};
 
 function generateInitialSignalData() {
   // return new Array(1024).fill(0).map((_, index) => Math.sin(index * 0.0001));
-  return new Array(1024).fill(0);
+  return new Array(2048).fill(0);
 }
 
+const DEFAULT_SIGNAL = generateInitialSignalData();
+
 const MastheadMusicWaterfall = (props: Props) => {
-  const [data, setData] = useState(generateInitialSignalData());
+  const [data, setData] = useState([...DEFAULT_SIGNAL]);
   const animationRef = useRef<ReturnType<typeof requestAnimationFrame> | null>(
     null
   );
@@ -18,8 +20,11 @@ const MastheadMusicWaterfall = (props: Props) => {
 
   const draw = (now: number) => {
     // Generate more sine wave samples
-    const newValue = Math.sin(now * 0.0001);
-    setData((prevState) => [...prevState.slice(1), newValue]);
+    const newValue = Math.sin(now * 0.0005);
+    // const effectValue = Math.random() * 2 - 1;
+    // const effectValue = newValue * 10;
+    const effectValue = Math.sin(now * 0.005) * 10;
+    setData((prevState) => [newValue, effectValue, ...prevState.slice(0, -1)]);
 
     animationRef.current = requestAnimationFrame(draw);
   };
