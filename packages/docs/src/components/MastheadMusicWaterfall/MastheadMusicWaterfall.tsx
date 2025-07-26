@@ -1,48 +1,41 @@
 import useAudioStore from "@site/src/store/audio";
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import WaterfallViz from "./WaterfallViz";
 
 type Props = {};
 
+function generateInitialSignalData() {
+  // return new Array(1024).fill(0).map((_, index) => Math.sin(index * 0.0001));
+  return new Array(1024).fill(0);
+}
+
 const MastheadMusicWaterfall = (props: Props) => {
-  const { context, setContext, addNode, setChain } = useAudioStore();
+  const [data, setData] = useState(generateInitialSignalData());
+  const animationRef = useRef<ReturnType<typeof requestAnimationFrame> | null>(
+    null
+  );
+  const prevTime = useRef(0);
 
-  // Create audio context initially
-  // @TODO: Move this to a separate service
+  const draw = (now: number) => {
+    // Generate more sine wave samples
+    const newValue = Math.sin(now * 0.0001);
+    setData((prevState) => [...prevState.slice(1), newValue]);
+
+    animationRef.current = requestAnimationFrame(draw);
+  };
+  console.log("data", data);
+
   useEffect(() => {
-    if (!context) {
-      const audioCtx = new AudioContext();
-      audioCtx.resume();
+    animationRef.current = requestAnimationFrame(draw);
 
-      console.log("audioCtx", audioCtx.state);
-      setContext(audioCtx);
-    }
     return () => {
-      setContext(null);
+      if (animationRef.current) cancelAnimationFrame(animationRef.current);
     };
-  }, []);
-
-  // Create audio signal
-  useEffect(() => {
-    if (!context) return;
-
-    // Create audio nodes
-    const osc = context.createOscillator();
-    osc.start();
-    const analyser = context.createAnalyser();
-    analyser.fftSize = 1024;
-
-    // Add nodes to store
-    addNode("osc", osc);
-    addNode("analyser", analyser);
-
-    // Setup the audio chain
-    setChain(["osc", "analyser"]);
-  }, [context]);
+  }, [draw]);
 
   return (
-    <div>
-      <WaterfallViz />
+    <div style={{ width: "100%", height: "90vh", display: "flex" }}>
+      <WaterfallViz data={data} />
     </div>
   );
 };

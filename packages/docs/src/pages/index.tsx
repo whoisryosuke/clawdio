@@ -39,6 +39,7 @@ export default function Home(): ReactNode {
       description="Description will go into a meta tag in <head />"
     >
       <MastheadMusicWaterfall />
+      <div style={{ height: "100vh" }}>Test</div>
     </Layout>
   );
 }

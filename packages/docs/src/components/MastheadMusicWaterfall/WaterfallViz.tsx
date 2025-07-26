@@ -1,110 +1,84 @@
 import { type ComponentProps, useCallback, useEffect, useRef } from "react";
 import map from "../../utils/map";
 import { useColorMode } from "@docusaurus/theme-common";
-import useAudioStore from "@site/src/store/audio";
 
 // Assuming numbers are 0-1
 type GraphData = number[];
-const DEFAULT_AUDIO_HEIGHT = 128;
+const DEFAULT_AUDIO_HEIGHT = 1;
 
 type Props = {
-  animated?: boolean;
-  color?: string;
-  fps?: number;
+  data: GraphData;
 };
 
-const WaterfallViz = ({ animated, color = "blue", fps, ...props }: Props) => {
-  const nodes = useAudioStore((state) => state.nodes);
+const WaterfallViz = ({ data, ...props }: Props) => {
   const { colorMode } = useColorMode();
   const bgColor = colorMode === "dark" ? "#111" : "#EEE";
   const lineColor = colorMode === "dark" ? "blue" : "blue";
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const data = useRef<Uint8Array>(new Uint8Array(0));
-  const animationRef = useRef<ReturnType<typeof requestAnimationFrame> | null>(
-    null
-  );
-  const prevTime = useRef(0);
 
-  const analyser = nodes.get("analyser") as AnalyserNode | null;
+  const draw = useCallback(() => {
+    if (!canvasRef.current) return;
+    const canvas = canvasRef.current;
 
-  const draw = useCallback(
-    (now: number) => {
-      // Draw to a specific FPS if needed
-      if (fps && animated) {
-        const fpsInterval = 1000 / fps;
-        const elapsed = now - prevTime.current;
-        // If we haven't elapsed enough time, keep looping
-        if (elapsed < fpsInterval) {
-          return (animationRef.current = requestAnimationFrame(draw));
-        } else {
-          prevTime.current = now - (elapsed % fpsInterval);
-        }
-      }
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
 
-      if (!canvasRef.current) return;
-      const canvas = canvasRef.current;
+    const canvasWidth = canvas.width;
+    const canvasHeight = canvas.height;
 
-      const ctx = canvas.getContext("2d");
-      if (!ctx) return;
+    // Clear drawing
+    ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+    ctx.fillStyle = bgColor;
+    ctx.fillRect(0, 0, canvasWidth, canvasHeight);
 
-      const canvasWidth = canvas.width;
-      const canvasHeight = canvas.height;
+    ctx.beginPath();
+    ctx.lineWidth = 1.5;
+    ctx.strokeStyle = lineColor;
 
-      // Get audio data
-      if (!analyser || !data.current) return;
-
-      // Update waveform data as a ref
-      if (data.current.length == 0) {
-        const newBufferLength = analyser.frequencyBinCount;
-        data.current = new Uint8Array(newBufferLength);
-      }
-      analyser.getByteTimeDomainData(data.current);
-
-      // Clear drawing
-      ctx.clearRect(0, 0, canvasWidth, canvasHeight);
-      ctx.fillStyle = bgColor;
-      ctx.fillRect(0, 0, canvasWidth, canvasHeight);
-
-      ctx.beginPath();
-      ctx.lineWidth = 1.5;
-      ctx.strokeStyle = lineColor;
+    for (let lineIndex = 0; lineIndex < canvasWidth / 100; lineIndex++) {
       for (let i = 0; i < canvasWidth; i++) {
-        const index = Math.floor(
-          map(i, 0, canvasWidth, 0, data.current.length)
-        );
-        const x = i;
+        const index = Math.floor(map(i, 0, canvasHeight, 0, data.length));
+        const y = i;
         // We scale the audio values to 0-1 to make it easier
-        const amplitude = map(
-          data.current[index],
-          DEFAULT_AUDIO_HEIGHT - 20,
-          DEFAULT_AUDIO_HEIGHT + 20,
-          0,
-          1
-        );
-        const y = (amplitude * canvasHeight) / 2 + canvasHeight / 4;
+        const amplitude = map(data[index], -1, 1, 0, 1);
+        const x = (amplitude * canvasWidth) / 2 + lineIndex * 100;
         if (i === 0) {
           ctx.moveTo(x, y);
         } else {
           ctx.lineTo(x, y);
         }
       }
+    }
 
-      ctx.stroke();
-
-      if (animated) animationRef.current = requestAnimationFrame(draw);
-    },
-    [data, lineColor, bgColor, animated, fps]
-  );
+    ctx.stroke();
+  }, [data, colorMode]);
 
   useEffect(() => {
-    animationRef.current = requestAnimationFrame(draw);
+    draw();
+  }, [data, colorMode]);
 
-    return () => {
-      if (animationRef.current) cancelAnimationFrame(animationRef.current);
-    };
-  }, [draw, lineColor, bgColor, fps]);
+  // Function to resize the canvas
+  function resizeCanvas() {
+    if (!canvasRef.current) return;
+    canvasRef.current.width = window.innerWidth;
+    canvasRef.current.height = window.innerHeight;
+  }
 
-  return <canvas ref={canvasRef} {...props} />;
+  useEffect(() => {
+    resizeCanvas();
+    // Add an event listener to resize the canvas when the window is resized
+    window.addEventListener("resize", resizeCanvas);
+  }, []);
+
+  return (
+    <canvas
+      ref={canvasRef}
+      width={"100%"}
+      height={"100%"}
+      style={{ flex: 1 }}
+      {...props}
+    />
+  );
 };
 
 export default WaterfallViz;
