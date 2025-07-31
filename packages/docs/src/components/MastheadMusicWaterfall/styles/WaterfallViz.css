@@ -1,0 +1,19 @@
+.WaterfallViz_Container {
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.WaterfallViz_Canvas {
+  position: relative;
+}
+
+.WaterfallViz_Gradient {
+  width: 100%;
+  min-height: 40vh;
+  position: absolute;
+  bottom: 0;
+  background: var(--gradient-black-to-transparent);
+  /* background-color: red; */
+}

@@ -1,0 +1,15 @@
+.clw-stack {
+  --gap: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+}
+
+.clw-stack.horizontal {
+  flex-direction: row;
+}
+
+.clw-stack.centered {
+  justify-content: center;
+  align-items: center;
+}

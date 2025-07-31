@@ -1,0 +1,33 @@
+.clw-btn {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 12px 14px;
+  padding-right: 128px;
+
+  background: radial-gradient(50% 220.45% at 50% 50%, #842121 0%, #4b1313 100%);
+  border: 1.5px solid var(--clawdio-1400);
+  box-shadow: 0px 2px 12px var(--clawdio-1600);
+  border-radius: 8px;
+
+  color: var(--white);
+  font-size: var(--heading-h4);
+  font-weight: 500;
+  letter-spacing: 0.2px;
+}
+
+/* Clear styles */
+.clw-btn.secondary,
+.clw-btn.ghost {
+  border-color: #232326;
+  filter: drop-shadow(0px 2px 6px #232326);
+  box-shadow: none;
+}
+
+.clw-btn.secondary {
+  background: var(--gray-1);
+}
+
+.clw-btn.ghost {
+  background: transparent;
+}

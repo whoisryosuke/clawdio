@@ -8,6 +8,7 @@ import {
 import map from "../../utils/map";
 import { useColorMode } from "@docusaurus/theme-common";
 import lerp from "@site/src/utils/lerp";
+import "./styles/WaterfallViz.css";
 
 function generateInitialSignalData() {
   // return new Array(1024).fill(0).map((_, index) => Math.sin(index * 0.0001));
@@ -57,7 +58,7 @@ const WaterfallViz = ({ ...props }: Props) => {
 
     const gradient = ctx.createLinearGradient(0, 0, 0, canvasHeight); // Gradient from (0,0) to (200,0)
     gradient.addColorStop(0, lineColor); // Start color
-    gradient.addColorStop(0.5, lineColor); // Middle color
+    gradient.addColorStop(0.3, lineColor); // Middle color
     gradient.addColorStop(1, CLAWDIO_LINE); // End color
 
     ctx.beginPath();
@@ -150,7 +151,7 @@ const WaterfallViz = ({ ...props }: Props) => {
   }, [draw]);
 
   return (
-    <>
+    <div className="WaterfallViz_Container">
       <div
         style={{
           position: "fixed",
@@ -163,13 +164,15 @@ const WaterfallViz = ({ ...props }: Props) => {
         FPS: <span ref={fpsRef}></span>
       </div>
       <canvas
+        className="WaterfallViz_Canvas"
         ref={canvasRef}
         width={"100%"}
         height={"100%"}
         style={{ flex: 1 }}
         {...props}
       />
-    </>
+      <div className="WaterfallViz_Gradient" />
+    </div>
   );
 };
 

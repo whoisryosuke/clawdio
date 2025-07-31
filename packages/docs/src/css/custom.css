@@ -7,24 +7,145 @@
 /* You can override the default Infima variables here. */
 :root {
   --ifm-color-primary: #2e8555;
-  --ifm-color-primary-dark: #29784c;
-  --ifm-color-primary-darker: #277148;
-  --ifm-color-primary-darkest: #205d3b;
+  --ifm-color-primary: #29784c;
+  --ifm-color-primaryer: #277148;
+  --ifm-color-primaryest: #205d3b;
   --ifm-color-primary-light: #33925d;
   --ifm-color-primary-lighter: #359962;
   --ifm-color-primary-lightest: #3cad6e;
   --ifm-code-font-size: 95%;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+
+  /* Color styles */
+  --white: rgba(243, 243, 242, 1);
+  --black: rgba(12, 12, 13, 1);
+  --clawdio-100: rgba(248, 234, 234, 1);
+  --clawdio-1000-brand: rgba(188, 47, 47, 1);
+  --clawdio-1100: rgba(169, 42, 42, 1);
+  --clawdio-1200: rgba(150, 38, 38, 1);
+  --clawdio-1300: rgba(132, 33, 33, 1);
+  --clawdio-1400: rgba(113, 28, 28, 1);
+  --clawdio-1500: rgba(94, 24, 24, 1);
+  --clawdio-1600: rgba(75, 19, 19, 1);
+  --clawdio-1700: rgba(56, 14, 14, 1);
+  --clawdio-1800: rgba(19, 5, 5, 1);
+  --clawdio-200: rgba(242, 213, 213, 1);
+  --clawdio-300: rgba(235, 193, 193, 1);
+  --clawdio-400: rgba(222, 151, 151, 1);
+  --clawdio-500: rgba(215, 130, 130, 1);
+  --clawdio-600: rgba(208, 109, 109, 1);
+  --clawdio-700: rgba(201, 89, 89, 1);
+  --clawdio-800: rgba(195, 68, 68, 1);
+  --clawdio-900: rgba(188, 47, 47, 1);
+  --gray-1: rgba(253, 252, 253, 1);
+  --gray-10: rgba(134, 132, 141, 1);
+  --gray-11: rgba(111, 110, 119, 1);
+  --gray-12: rgba(26, 21, 35, 1);
+  --gray-2: rgba(249, 248, 249, 1);
+  --gray-3: rgba(244, 242, 244, 1);
+  --gray-4: rgba(238, 237, 239, 1);
+  --gray-5: rgba(233, 232, 234, 1);
+  --gray-6: rgba(228, 226, 228, 1);
+  --gray-7: rgba(220, 219, 221, 1);
+  --gray-8: rgba(200, 199, 203, 1);
+  --gray-9: rgba(144, 142, 150, 1);
+  --violet-1: rgba(253, 252, 254, 1);
+  --violet-10: rgba(100, 79, 193, 1);
+  --violet-11: rgba(87, 70, 175, 1);
+  --violet-12: rgba(32, 19, 75, 1);
+  --violet-2: rgba(251, 250, 255, 1);
+  --violet-3: rgba(245, 242, 255, 1);
+  --violet-4: rgba(237, 233, 254, 1);
+  --violet-5: rgba(228, 222, 252, 1);
+  --violet-6: rgba(215, 207, 249, 1);
+  --violet-7: rgba(196, 184, 243, 1);
+  --violet-8: rgba(170, 153, 236, 1);
+  --violet-9: rgba(110, 86, 207, 1);
+
+  /* Fonts */
+  --font-family: "IBM Plex Sans", sans-serif;
+  --font-family-mono: "IBM Plex Mono", sans-serif;
+
+  /* Text-size styles */
+  /* base size: --body-1 (16px) */
+  --title-title-1: 4rem;
+  --title-title-2: 2.5rem;
+  --title-title-3: 2rem;
+  --heading-h1: 1.75rem;
+  --heading-h2: 1.62rem;
+  --heading-h3: 1.5rem;
+  --heading-h4: 1.25rem;
+  --label-1: 1.06rem;
+  --label-2: 0.94rem;
+  --label-3: 0.81rem;
+  --label-4: 0.75rem;
+  --label-5: 0.69rem;
+  --body-1: 1rem;
+  --body-2: 0.88rem;
+  --body-3: 0.75rem;
+  --tiny: 0.62rem;
+  --tiny--extended: 0.62rem;
+  --micro: 0.56rem;
+
+  /* Gradients */
+  /* Rectangle 13 */
+  --gradient-black-to-transparent: linear-gradient(
+    0deg,
+    var(--black) 0%,
+    rgba(12, 12, 13, 0) 100%
+  );
+
+  /* Semantic */
+  --colors-page-bg: var(--white);
+  --colors-text: var(--gray-12);
+
+  /* Overrides */
+  --ifm-background-color: var(--colors-page-bg);
+  --ifm-navbar-background-color: transparent;
+  --ifm-font-family-base: var(--font-family);
+  --ifm-font-family-monospace: var(--font-family-mono);
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
-[data-theme='dark'] {
+[data-theme="dark"] {
   --ifm-color-primary: #25c2a0;
-  --ifm-color-primary-dark: #21af90;
-  --ifm-color-primary-darker: #1fa588;
-  --ifm-color-primary-darkest: #1a8870;
+  --ifm-color-primary: #21af90;
+  --ifm-color-primaryer: #1fa588;
+  --ifm-color-primaryest: #1a8870;
   --ifm-color-primary-light: #29d5b0;
   --ifm-color-primary-lighter: #32d8b4;
   --ifm-color-primary-lightest: #4fddbf;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+
+  --gray-1: rgba(22, 22, 24, 1);
+  --gray-10: rgba(126, 125, 134, 1);
+  --gray-11: rgba(160, 159, 166, 1);
+  --gray-12: rgba(237, 237, 239, 1);
+  --gray-2: rgba(28, 28, 31, 1);
+  --gray-3: rgba(35, 35, 38, 1);
+  --gray-4: rgba(40, 40, 44, 1);
+  --gray-5: rgba(46, 46, 50, 1);
+  --gray-6: rgba(52, 52, 58, 1);
+  --gray-7: rgba(62, 62, 68, 1);
+  --gray-8: rgba(80, 79, 87, 1);
+  --gray-9: rgba(112, 111, 120, 1);
+  --violet-1: rgba(23, 21, 31, 1);
+  --violet-10: rgba(124, 102, 220, 1);
+  --violet-11: rgba(158, 140, 252, 1);
+  --violet-12: rgba(241, 238, 254, 1);
+  --violet-2: rgba(28, 23, 43, 1);
+  --violet-3: rgba(37, 30, 64, 1);
+  --violet-4: rgba(44, 34, 80, 1);
+  --violet-5: rgba(50, 39, 95, 1);
+  --violet-6: rgba(57, 44, 114, 1);
+  --violet-7: rgba(68, 53, 146, 1);
+  --violet-8: rgba(88, 66, 195, 1);
+  --violet-9: rgba(110, 86, 207, 1);
+
+  /* Semantic */
+  --colors-page-bg: var(--black);
+}
+
+body {
+  background-color: var(--colors-page-bg);
 }

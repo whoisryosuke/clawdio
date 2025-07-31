@@ -1,0 +1,25 @@
+.MastheadContent_Container {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  z-index: 420;
+}
+
+.MastheadContent_Logo {
+  margin-bottom: 1rem;
+}
+
+.MastheadContent_Content {
+  max-width: 800px;
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.MastheadContent_Title {
+  font-size: var(--title-title-3);
+  font-weight: 400;
+  color: var(--gray-11);
+}
