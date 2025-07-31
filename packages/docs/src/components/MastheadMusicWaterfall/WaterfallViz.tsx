@@ -131,9 +131,9 @@ const WaterfallViz = ({ ...props }: Props) => {
     prevTime.current = now - (elapsed % newFps);
     // Generate more sine wave samples
     const newValue = Math.sin(now * 0.0005);
-    // const effectValue = Math.random() * 2 - 1;
+    const noise = Math.random() * 2 - 1;
     // const effectValue = newValue * 10;
-    const effectValue = Math.sin(now * 0.005) * 10;
+    const effectValue = Math.sin(now * 0.01) + noise * 2;
     data.current = [newValue, effectValue, ...data.current.slice(0, -2)];
     // setData((prevState) => [newValue, effectValue, ...prevState.slice(0, -1)]);
 
