@@ -10,10 +10,10 @@ type Props = {};
 const ClawdioBreakdown = (props: Props) => {
   return (
     <Stack
-      className="ClawdioBreakdown_Container"
+      className="ClawdioBreakdown_Container ContentArea"
       centered
       gap="2rem"
-      style={{ padding: "5rem 0 20rem 0" }}
+      style={{ marginTop: "-10rem", paddingBottom: "20rem", zIndex: 710 }}
     >
       <Stack gap="0.25rem" style={{ maxWidth: "800px", marginBottom: "4rem" }}>
         <Title as="h1">What is clawdio?</Title>
