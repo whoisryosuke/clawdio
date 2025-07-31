@@ -68,9 +68,9 @@
 
   /* Text-size styles */
   /* base size: --body-1 (16px) */
-  --title-title-1: 4rem;
-  --title-title-2: 2.5rem;
-  --title-title-3: 2rem;
+  --title-1: 4rem;
+  --title-2: 2.5rem;
+  --title-3: 2rem;
   --heading-h1: 1.75rem;
   --heading-h2: 1.62rem;
   --heading-h3: 1.5rem;

@@ -1,0 +1,21 @@
+.clw-heading {
+  color: var(--colors-text);
+  font-weight: 500;
+}
+
+h1.clw-heading {
+  font-size: var(--heading-h1);
+}
+h2.clw-heading {
+  font-size: var(--heading-h2);
+}
+h3.clw-heading {
+  font-size: var(--heading-h3);
+}
+h4.clw-heading {
+  font-size: var(--heading-h4);
+}
+
+.clw-heading.thin {
+  font-weight: 400;
+}

@@ -8,6 +8,7 @@ import Heading from "@theme/Heading";
 
 import styles from "./index.module.css";
 import MastheadMusicWaterfall from "../components/MastheadMusicWaterfall/MastheadMusicWaterfall";
+import ClawdioBreakdown from "../components/ClawdioBreakdown/ClawdioBreakdown";
 
 export default function Home(): ReactNode {
   const { siteConfig } = useDocusaurusContext();
@@ -17,7 +18,7 @@ export default function Home(): ReactNode {
       description="An experimental project aimed to create modern effects for the Web Audio API using WASM and Rust."
     >
       <MastheadMusicWaterfall />
-      <div style={{ height: "100vh" }}>Test</div>
+      <ClawdioBreakdown />
     </Layout>
   );
 }

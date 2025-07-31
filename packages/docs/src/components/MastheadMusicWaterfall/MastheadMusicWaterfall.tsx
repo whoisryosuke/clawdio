@@ -1,4 +1,3 @@
-import useAudioStore from "@site/src/store/audio";
 import React, { useEffect, useRef, useState } from "react";
 import WaterfallViz from "./WaterfallViz";
 import MastheadContent from "./MastheadContent";
@@ -10,9 +9,10 @@ const MastheadMusicWaterfall = (props: Props) => {
     <div
       style={{
         width: "100%",
-        height: "90vh",
+        height: "100vh",
         position: "relative",
         marginTop: "-4rem",
+        marginBottom: "4rem",
       }}
     >
       <MastheadContent />

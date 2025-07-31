@@ -19,7 +19,7 @@
 }
 
 .MastheadContent_Title {
-  font-size: var(--title-title-3);
+  font-size: var(--title-3);
   font-weight: 400;
   color: var(--gray-11);
 }

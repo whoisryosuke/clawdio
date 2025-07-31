@@ -1,0 +1,16 @@
+.clw-title {
+  color: var(--colors-text);
+  font-weight: 500;
+}
+
+h1.clw-title {
+  font-size: var(--title-1);
+}
+
+h2.clw-title {
+  font-size: var(--title-2);
+}
+
+h3.clw-title {
+  font-size: var(--title-3);
+}
