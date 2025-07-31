@@ -69,7 +69,7 @@ const WaterfallViz = ({ ...props }: Props) => {
 
     for (
       let lineIndex = 0;
-      lineIndex < (canvasWidth * 2) / LINE_DIVISOR;
+      lineIndex < (canvasWidth * 1.5) / LINE_DIVISOR;
       lineIndex++
     ) {
       if (lineIndex == 0) {
@@ -95,7 +95,7 @@ const WaterfallViz = ({ ...props }: Props) => {
       for (let i = 0; i < values.length; i++) {
         const [amplitude, y] = values[i];
         // Shifts to the left to fill in screen more (since we have double the lines we need anyway)
-        const offset = canvasWidth / 1.5;
+        const offset = canvasWidth / 2;
         // Distance between each line
         const lineOffset = lineIndex * LINE_DIVISOR;
         const x = amplitude / 2 + lineOffset - offset;
