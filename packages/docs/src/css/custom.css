@@ -235,6 +235,10 @@ body {
   background-color: var(--colors-page-bg);
 }
 
+/*  Shared Styles */
+
+/* Layout */
+
 .ContentArea {
   padding: var(--space-3-5);
 }
@@ -248,4 +252,11 @@ body {
   .ContentArea {
     padding: var(--space-2);
   }
+}
+
+/* Component Sub-styles */
+
+.GlowStroke {
+  border: 1.8px solid var(--gray-5);
+  box-shadow: 0px 2px 6px var(--gray-4);
 }

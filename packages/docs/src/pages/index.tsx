@@ -9,6 +9,7 @@ import Heading from "@theme/Heading";
 import styles from "./index.module.css";
 import MastheadMusicWaterfall from "../components/MastheadMusicWaterfall/MastheadMusicWaterfall";
 import ClawdioBreakdown from "../components/ClawdioBreakdown/ClawdioBreakdown";
+import FilterEffectsScroller from "../components/FilterEffectsScroller/FilterEffectsScroller";
 
 export default function Home(): ReactNode {
   const { siteConfig } = useDocusaurusContext();
@@ -19,6 +20,7 @@ export default function Home(): ReactNode {
     >
       <MastheadMusicWaterfall />
       <ClawdioBreakdown />
+      <FilterEffectsScroller />
     </Layout>
   );
 }

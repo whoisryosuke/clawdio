@@ -19,3 +19,7 @@ h4.clw-heading {
 .clw-heading.thin {
   font-weight: 400;
 }
+
+.clw-heading.mono {
+  font-family: var(--font-family-mono);
+}

@@ -1,0 +1,15 @@
+.FilterEffectsScroller_Box,
+.FilterEffectsScroller_Box .signal {
+  background: var(--black);
+  border-radius: 14px;
+}
+
+.FilterEffectsScroller_Box {
+  padding: 1rem;
+}
+
+.FilterEffectsScroller_Box .signal {
+  padding: 1rem;
+  margin-top: -3rem;
+  margin-bottom: 1rem;
+}
