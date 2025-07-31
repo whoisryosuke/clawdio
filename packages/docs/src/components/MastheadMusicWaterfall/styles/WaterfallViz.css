@@ -17,3 +17,10 @@
   background: var(--gradient-black-to-transparent);
   /* background-color: red; */
 }
+
+/* Hide animation for motion-sensitive users */
+@media (prefers-reduced-motion: reduce) {
+  .WaterfallViz_Canvas {
+    opacity: 0;
+  }
+}
