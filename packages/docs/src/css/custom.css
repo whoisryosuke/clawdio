@@ -99,6 +99,13 @@
   --colors-page-bg: var(--white);
   --colors-text: var(--gray-12);
 
+  /* Breakpoints */
+  --breakpoint-mobile: 320px;
+  --breakpoint-tablet: 600px;
+  --breakpoint-computer: 992px;
+  --breakpoint-desktop: 1200px;
+  --breakpoint-widescreen: 1600px;
+
   /* Overrides */
   --ifm-background-color: var(--colors-page-bg);
   --ifm-navbar-background-color: transparent;

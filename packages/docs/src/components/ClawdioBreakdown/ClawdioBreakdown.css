@@ -5,7 +5,14 @@
 }
 
 .ClawdioBreakdownGraphic_Container {
+  flex-direction: row;
 }
+
+.ClawdioBreakdown_Container .SignalContainer {
+  justify-content: space-between;
+  transition: transform 420ms ease-in-out;
+}
+
 .ClawdioBreakdownGraphic_Wave_Left {
 }
 .ClawdioBreakdownGraphic_Box {
@@ -17,6 +24,29 @@
   border-radius: 14.5px;
 
   padding: 2rem 4rem;
+  margin-bottom: 2rem;
 }
 .ClawdioBreakdownGraphic_Wave_Right {
+}
+
+.ClawdioBreakdownGraphic_Container .icon {
+  --size: 48px;
+  width: var(--size);
+  height: var(--size);
+}
+
+@media screen and (max-width: 1200px) {
+  .ClawdioBreakdownGraphic_Container {
+    flex-direction: column;
+  }
+  .ClawdioBreakdown_Container .SignalContainer {
+    transform: rotate(90deg);
+    z-index: -1;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .ClawdioBreakdownGraphic_Container .icon {
+    --size: 24px;
+  }
 }
