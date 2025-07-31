@@ -1,7 +1,7 @@
 import React from "react";
 import "./styles/MastheadContent.css";
 import ClawdioLogo from "../ClawdioLogo/ClawdioLogo";
-import ButtonLink from "../ui/Button/ButtonLink";
+import Button from "../ui/Button/Button";
 import Stack from "../ui/Stack/Stack";
 
 type Props = {};
@@ -16,10 +16,12 @@ const MastheadContent = (props: Props) => {
           Audio API using WASM and Rust.
         </h2>
         <Stack horizontal centered>
-          <ButtonLink href="#">Getting Started</ButtonLink>
-          <ButtonLink href="#" secondary>
+          <Button as="a" href="#">
+            Getting Started
+          </Button>
+          <Button as="a" href="#" secondary>
             See Examples
-          </ButtonLink>
+          </Button>
         </Stack>
       </Stack>
     </div>

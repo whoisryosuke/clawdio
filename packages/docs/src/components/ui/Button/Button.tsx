@@ -1,13 +1,30 @@
-import React, { PropsWithChildren } from "react";
+import React, { HTMLProps, PropsWithChildren } from "react";
 import "./Button.css";
+import clsx from "clsx";
 
-type Props = {};
+type Props = HTMLProps<HTMLButtonElement | HTMLAnchorElement> & {
+  as: keyof HTMLElementTagNameMap;
+  ghost?: boolean;
+  secondary?: boolean;
+};
 
-const Button = ({ children, ...props }: PropsWithChildren<Props>) => {
+const Button = ({
+  ghost,
+  secondary,
+  children,
+  className,
+  ...props
+}: PropsWithChildren<Props>) => {
+  const Component = props.as ?? "button";
+  const ghostStyles = ghost && "ghost";
+  const secondaryStyles = secondary && "secondary";
   return (
-    <button className="clw-btn" {...props}>
+    <Component
+      className={clsx("clw-btn", className, ghostStyles, secondaryStyles)}
+      {...props}
+    >
       {children}
-    </button>
+    </Component>
   );
 };
 
