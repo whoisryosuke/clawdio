@@ -81,7 +81,7 @@ const WaterfallViz = ({ ...props }: Props) => {
           const currentValue = lerp(
             normalValue,
             effectedValue,
-            i / canvasHeight - 0.5
+            i / canvasHeight - 0.25
           );
 
           const y = i;
@@ -130,7 +130,7 @@ const WaterfallViz = ({ ...props }: Props) => {
       fpsRef.current.textContent = Math.floor(newFps).toString();
     prevTime.current = now - (elapsed % newFps);
     // Generate more sine wave samples
-    const newValue = Math.sin(now * 0.0005);
+    const newValue = Math.sin(now * 0.003);
     const noise = Math.random() * 2 - 1;
     // const effectValue = newValue * 10;
     const effectValue = Math.sin(now * 0.01) + noise * 2;
