@@ -1,3 +1,18 @@
+.FilterEffectsScroller_Container {
+  --count: 3;
+  position: relative;
+  height: calc(var(--count) * 100svh);
+
+  border: 4px dashed blue;
+}
+
+.FilterEffectsScroller_Content {
+  position: fixed;
+  inset: 0;
+
+  border: 4px dashed rgb(0, 174, 255);
+}
+
 .FilterEffectsScroller_Box,
 .FilterEffectsScroller_Box .signal {
   background: var(--black);
@@ -12,4 +27,12 @@
   padding: 1rem;
   margin-top: -3rem;
   margin-bottom: 1rem;
+}
+
+.FilterEffectListItem_Container {
+  position: absolute;
+  inset: 0;
+
+  display: flex;
+  justify-content: center;
 }
