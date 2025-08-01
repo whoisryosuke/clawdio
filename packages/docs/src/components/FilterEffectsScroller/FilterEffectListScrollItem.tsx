@@ -53,7 +53,9 @@ const FilterEffectListScrollItem = ({
     >
       <motion.div
         style={{
+          width: "100%",
           display: "flex",
+          justifyContent: "center",
           opacity,
           translateY,
           // @ts-expect-error it works, just not typed
