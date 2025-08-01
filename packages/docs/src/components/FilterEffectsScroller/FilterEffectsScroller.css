@@ -2,6 +2,7 @@
   --count: 3;
   position: relative;
   height: calc(var(--count) * 100svh);
+  top: -50svh;
 
   border: 4px dashed blue;
 }
