@@ -140,11 +140,15 @@
   --space-20: 284px;
 
   /* Gradients */
-  /* Rectangle 13 */
   --gradient-black-to-transparent: linear-gradient(
     0deg,
     var(--black) 0%,
     rgba(12, 12, 13, 0) 100%
+  );
+  --gradient-transparent-to-black: linear-gradient(
+    0deg,
+    rgba(12, 12, 13, 0) 0%,
+    var(--black) 100%
   );
 
   /* Semantic */

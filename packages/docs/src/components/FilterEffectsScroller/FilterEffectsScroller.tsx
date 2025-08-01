@@ -64,6 +64,8 @@ const FilterEffectsScroller = (props: Props) => {
         ))}
       </div>
       <FilterEffectsVisual scrollProgress={scrollYProgress} />
+      <div className="FilterEffectsScroller_Gradient top" />
+      <div className="FilterEffectsScroller_Gradient bottom" />
     </div>
   );
 };
