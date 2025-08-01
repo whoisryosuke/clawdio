@@ -51,3 +51,9 @@
 .SignalSVG.pinknoise {
   stroke-dasharray: 4000;
 }
+
+.FilterEffectsVisual_Container {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+}

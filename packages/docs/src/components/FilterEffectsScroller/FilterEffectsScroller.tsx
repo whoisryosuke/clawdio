@@ -11,6 +11,7 @@ import FilterEffectListItem, {
 import PinkNoiseSignal from "../signals/PinkNoiseSignal";
 import FilterEffectListScrollItem from "./FilterEffectListScrollItem";
 import MoogSignal from "../signals/MoogSignal";
+import FilterEffectsVisual from "./FilterEffectsVisual";
 
 const EFFECTS: FilterEffectListItemProps[] = [
   {
@@ -62,6 +63,7 @@ const FilterEffectsScroller = (props: Props) => {
           />
         ))}
       </div>
+      <FilterEffectsVisual scrollProgress={scrollYProgress} />
     </div>
   );
 };
