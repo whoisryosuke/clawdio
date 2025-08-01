@@ -136,11 +136,31 @@ const FilterEffectsVisual = ({ scrollProgress, ...props }: Props) => {
     if (fpsRef.current && Math.floor(now % 8) == 0)
       fpsRef.current.textContent = Math.floor(newFps).toString();
     prevTime.current = now - (elapsed % newFps);
+
+    // Check scroll position to determine signal type
+    const scrollAnim = scrollProgress.get();
+    let signalType = "moog";
+    if (scrollAnim > 1 / 3 && scrollAnim <= 2 / 3) signalType = "pink";
+    if (scrollAnim > 2 / 3 && scrollAnim <= 1) signalType = "bitcrusher";
+
     // Generate more sine wave samples
     const newValue = Math.sin(now * 0.003);
-    const noise = Math.random() * 2 - 1;
     // const effectValue = newValue * 10;
-    const effectValue = Math.sin(now * 0.01) + noise * 2;
+    // const effectValue = Math.sin(now * 0.01) + noise * 2;
+
+    let effectValue;
+    switch (signalType) {
+      case "bitcrusher":
+        effectValue = Math.sin(now * 0.01) * 10;
+        break;
+      case "moog":
+        effectValue = Math.sin(now * 0.006);
+        break;
+      case "pink":
+        const noise = Math.random() * 2 - 1;
+        effectValue = Math.sin(now * 0.01) + noise * 2;
+        break;
+    }
     data.current = [newValue, effectValue, ...data.current.slice(0, -2)];
     // setData((prevState) => [newValue, effectValue, ...prevState.slice(0, -1)]);
 

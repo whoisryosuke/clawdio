@@ -4,14 +4,14 @@
   height: calc(var(--count) * 100svh);
   top: -50svh;
 
-  border: 4px dashed blue;
+  /* border: 4px dashed blue; */
 }
 
 .FilterEffectsScroller_Content {
   position: fixed;
   inset: 0;
 
-  border: 4px dashed rgb(0, 174, 255);
+  /* border: 4px dashed rgb(0, 174, 255); */
 }
 
 .FilterEffectsScroller_Box,

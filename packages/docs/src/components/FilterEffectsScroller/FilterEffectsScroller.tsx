@@ -15,12 +15,11 @@ import FilterEffectsVisual from "./FilterEffectsVisual";
 
 const EFFECTS: FilterEffectListItemProps[] = [
   {
-    signal: <BitcrusherSignal />,
-    title: "Bitcrusher",
-    packageName: "clawdio-bitcrusher",
-    description: `Bitcrusher creates a crunchy "8-bit" sound by lowering the
-            resolution of the signal.`,
-    path: 1000,
+    signal: <MoogSignal />,
+    title: "Moog Filter",
+    packageName: "clawdio-moog",
+    description: `Named after the “ladder” filter in Moog synthesizers, it mimics the voltage control to create a warm, thick sound.`,
+    path: 700,
   },
   {
     signal: <PinkNoiseSignal />,
@@ -30,11 +29,12 @@ const EFFECTS: FilterEffectListItemProps[] = [
     path: 4000,
   },
   {
-    signal: <MoogSignal />,
-    title: "Moog Filter",
-    packageName: "clawdio-moog",
-    description: `Named after the “ladder” filter in Moog synthesizers, it mimics the voltage control to create a warm, thick sound.`,
-    path: 700,
+    signal: <BitcrusherSignal />,
+    title: "Bitcrusher",
+    packageName: "clawdio-bitcrusher",
+    description: `Bitcrusher creates a crunchy "8-bit" sound by lowering the
+            resolution of the signal.`,
+    path: 1000,
   },
 ];
 
