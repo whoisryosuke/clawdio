@@ -43,9 +43,11 @@ const FilterEffectListItem = ({
         <Heading as="h3" thin style={{ color: "var(--gray-11)" }}>
           {description}
         </Heading>
-        <Button as="a" href="#" ghost>
-          Learn more
-        </Button>
+        <Stack horizontal>
+          <Button as="a" href="#" ghost>
+            Learn more
+          </Button>
+        </Stack>
       </div>
     </Stack>
   );
