@@ -9,6 +9,7 @@ import map from "../../utils/map";
 import { useColorMode } from "@docusaurus/theme-common";
 import lerp from "@site/src/utils/lerp";
 import "./styles/WaterfallViz.css";
+import { useInView } from "motion/react";
 
 function generateInitialSignalData() {
   // return new Array(1024).fill(0).map((_, index) => Math.sin(index * 0.0001));
@@ -30,6 +31,9 @@ const CLAWDIO_BRAND = "#BC2F2F";
 const CLAWDIO_LINE = "#711C1C";
 
 const WaterfallViz = ({ ...props }: Props) => {
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const isInView = useInView(containerRef);
+  const isInViewRef = useRef(false);
   const data = useRef([...DEFAULT_SIGNAL]);
   const animationRef = useRef<ReturnType<typeof requestAnimationFrame> | null>(
     null
@@ -139,30 +143,36 @@ const WaterfallViz = ({ ...props }: Props) => {
 
     drawLines();
 
-    animationRef.current = requestAnimationFrame(draw);
+    // Only keep animating if in view
+    if (isInViewRef.current) animationRef.current = requestAnimationFrame(draw);
   };
 
   useEffect(() => {
-    animationRef.current = requestAnimationFrame(draw);
+    if (isInView) animationRef.current = requestAnimationFrame(draw);
 
     return () => {
       if (animationRef.current) cancelAnimationFrame(animationRef.current);
     };
-  }, [draw]);
+  }, [draw, isInView]);
+
+  useEffect(() => {
+    isInViewRef.current = isInView;
+  }, [isInView]);
 
   return (
-    <div className="WaterfallViz_Container">
-      <div
+    <div ref={containerRef} className="WaterfallViz_Container">
+      {/* <div
         style={{
           position: "fixed",
           top: 64,
           right: 16,
           background: "black",
           color: "white",
+          zIndex:710
         }}
       >
         FPS: <span ref={fpsRef}></span>
-      </div>
+      </div> */}
       <canvas
         className="WaterfallViz_Canvas"
         ref={canvasRef}
