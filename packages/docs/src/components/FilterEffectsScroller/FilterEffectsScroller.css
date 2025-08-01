@@ -38,6 +38,9 @@
   justify-content: center;
 }
 
+.SignalSVG {
+}
+
 .SignalSVG path {
   stroke-dashoffset: var(--svg-path);
 }
@@ -73,12 +76,17 @@
   position: fixed;
   background: var(--gradient-black-to-transparent);
   /* background-color: red; */
-  z-index: 710;
 }
 
 /* Hide animation for motion-sensitive users */
 @media (prefers-reduced-motion: reduce) {
-  .WaterfallViz_Canvas {
+  .FilterEffectsVisual_Canvas {
     opacity: 0;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .SignalSVG {
+    width: 100%;
   }
 }

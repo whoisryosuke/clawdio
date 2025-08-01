@@ -4,7 +4,7 @@ import BitcrusherSignal from "../signals/BitcrusherSignal";
 import Stack from "../ui/Stack/Stack";
 import Title from "../ui/Title/Title";
 import "./FilterEffectsScroller.css";
-import { useScroll, useTransform } from "motion/react";
+import { motion, useScroll, useTransform } from "motion/react";
 import FilterEffectListItem, {
   FilterEffectListItemProps,
 } from "./FilterEffectListItem";
@@ -47,6 +47,13 @@ const FilterEffectsScroller = (props: Props) => {
 
     offset: ["end end", "start start"],
   });
+  // const opacity = useTransform(scrollYProgress, [0, 1, 1, 0], [0, 1, 1, 0]);
+  const depth = useTransform(scrollYProgress, [0, 1, 1, 0], [-1, 710, 710, -1]);
+  const display = useTransform(
+    scrollYProgress,
+    [0, 1, 1, 0],
+    ["none", "fixed", "fixed", "none"]
+  );
   return (
     <div
       ref={containerRef}
@@ -64,8 +71,14 @@ const FilterEffectsScroller = (props: Props) => {
         ))}
       </div>
       <FilterEffectsVisual scrollProgress={scrollYProgress} />
-      <div className="FilterEffectsScroller_Gradient top" />
-      <div className="FilterEffectsScroller_Gradient bottom" />
+      <motion.div
+        className="FilterEffectsScroller_Gradient top"
+        style={{ display, zIndex: depth }}
+      />
+      <motion.div
+        className="FilterEffectsScroller_Gradient bottom"
+        style={{ display, zIndex: depth }}
+      />
     </div>
   );
 };
