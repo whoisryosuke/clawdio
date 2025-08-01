@@ -8,6 +8,7 @@ const PinkNoiseSignal: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
     fill="none"
     viewBox="0 0 475 60"
     color="var(--clawdio-1300)"
+    className="SignalSVG pinknoise"
     {...props}
   >
     <path

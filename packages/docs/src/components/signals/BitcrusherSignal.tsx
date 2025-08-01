@@ -8,6 +8,7 @@ const BitcrusherSignal: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
     fill="none"
     viewBox="0 0 487 77"
     color="var(--clawdio-1300)"
+    className="SignalSVG bitcrusher"
     {...props}
   >
     <path

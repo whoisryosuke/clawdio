@@ -19,20 +19,21 @@ const EFFECTS: FilterEffectListItemProps[] = [
     packageName: "clawdio-bitcrusher",
     description: `Bitcrusher creates a crunchy "8-bit" sound by lowering the
             resolution of the signal.`,
+    path: 1000,
   },
   {
     signal: <PinkNoiseSignal />,
     title: "Pink Noise",
     packageName: "clawdio-pink-noise",
-    description: `Bitcrusher creates a crunchy "8-bit" sound by lowering the
-            resolution of the signal.`,
+    description: `Pink noise sounds like waves on a beach, a waterfall, or a gentle “whoosh” sound. It’s a common sound signature that’s found in nature.`,
+    path: 4000,
   },
   {
     signal: <MoogSignal />,
     title: "Moog Filter",
     packageName: "clawdio-moog",
-    description: `Bitcrusher creates a crunchy "8-bit" sound by lowering the
-            resolution of the signal.`,
+    description: `Named after the “ladder” filter in Moog synthesizers, it mimics the voltage control to create a warm, thick sound.`,
+    path: 700,
   },
 ];
 

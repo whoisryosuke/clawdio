@@ -15,6 +15,7 @@ const FilterEffectListScrollItem = ({
   scrollProgress,
   total,
   index,
+  path,
   ...props
 }: Props) => {
   const increment = 1 / total;
@@ -35,9 +36,22 @@ const FilterEffectListScrollItem = ({
     [segmentEnd, segmentMiddleHold, segmentMiddle, segmentStart],
     [0, 1, 1, 0]
   );
+  const pathAnimation = useTransform(
+    scrollProgress,
+    [segmentEnd, segmentMiddleHold, segmentMiddle, segmentStart],
+    [path, 0, 0, path]
+  );
   return (
     <div className="FilterEffectListItem_Container">
-      <motion.div style={{ display: "flex", opacity, translateY }}>
+      <motion.div
+        style={{
+          display: "flex",
+          opacity,
+          translateY,
+          // @ts-expect-error it works, just not typed
+          "--svg-path": pathAnimation,
+        }}
+      >
         <FilterEffectListItem {...props} />
       </motion.div>
     </div>

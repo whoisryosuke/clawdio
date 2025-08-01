@@ -8,6 +8,7 @@ const MoogSignal: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
     fill="none"
     viewBox="0 0 476 88"
     color="var(--clawdio-1300)"
+    className="SignalSVG moog"
     {...props}
   >
     <path

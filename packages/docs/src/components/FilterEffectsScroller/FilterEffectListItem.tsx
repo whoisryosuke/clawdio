@@ -2,12 +2,14 @@ import React, { ReactNode } from "react";
 import Stack from "../ui/Stack/Stack";
 import Heading from "../ui/Heading/Heading";
 import Title from "../ui/Title/Title";
+import Button from "../ui/Button/Button";
 
 export type FilterEffectListItemProps = {
   signal: ReactNode;
   packageName: string;
   title: string;
   description: string;
+  path?: number;
 };
 
 const FilterEffectListItem = ({
@@ -41,6 +43,9 @@ const FilterEffectListItem = ({
         <Heading as="h3" thin style={{ color: "var(--gray-11)" }}>
           {description}
         </Heading>
+        <Button as="a" href="#" ghost>
+          Learn more
+        </Button>
       </div>
     </Stack>
   );

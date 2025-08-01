@@ -37,3 +37,17 @@
   display: flex;
   justify-content: center;
 }
+
+.SignalSVG path {
+  stroke-dashoffset: var(--svg-path);
+}
+.SignalSVG.bitcrusher {
+  /* 0 - 1000 */
+  stroke-dasharray: 1000;
+}
+.SignalSVG.moog {
+  stroke-dasharray: 700;
+}
+.SignalSVG.pinknoise {
+  stroke-dasharray: 4000;
+}
