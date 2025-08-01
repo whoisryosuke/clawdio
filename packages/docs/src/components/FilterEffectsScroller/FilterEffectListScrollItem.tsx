@@ -20,8 +20,9 @@ const FilterEffectListScrollItem = ({
 }: Props) => {
   const increment = 1 / total;
   const halfIncrement = increment / 4;
+  const offset = 0.1 / total;
   // Map from index/total to 0-1
-  const segmentStart = index / total;
+  const segmentStart = index / total - offset;
   const segmentMiddle = segmentStart + halfIncrement;
   const segmentMiddleHold = segmentStart + halfIncrement * 2;
   const segmentEnd = segmentStart + increment;

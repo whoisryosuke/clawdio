@@ -9,15 +9,15 @@ type Props = {};
 
 const TryNowCTA = (props: Props) => {
   return (
-    <Stack centered>
+    <Stack className="TryNowCTA" centered>
       <div className="TryNowCTA_Container ContentArea">
         <Stack className="TryNowCTA_Box" centered>
           <Title as="h1">Let's get jammin'</Title>
           <Heading as="h2" style={{ color: "var(--gray-10)" }}>
             Three simple steps: install, import, and use!
           </Heading>
-          <Button as="a" href="#" secondary>
-            Getting Started Guide
+          <Button as="a" href="#">
+            Browse the docs
           </Button>
         </Stack>
       </div>

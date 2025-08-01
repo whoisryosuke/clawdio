@@ -4,7 +4,7 @@ import BitcrusherSignal from "../signals/BitcrusherSignal";
 import Stack from "../ui/Stack/Stack";
 import Title from "../ui/Title/Title";
 import "./FilterEffectsScroller.css";
-import { motion, useScroll, useTransform } from "motion/react";
+import { motion, useInView, useScroll, useTransform } from "motion/react";
 import FilterEffectListItem, {
   FilterEffectListItemProps,
 } from "./FilterEffectListItem";
@@ -45,7 +45,7 @@ const FilterEffectsScroller = (props: Props) => {
   const { scrollYProgress } = useScroll({
     target: containerRef,
 
-    offset: ["end end", "start start"],
+    offset: ["1 0.6", "start start"],
   });
   // const opacity = useTransform(scrollYProgress, [0, 1, 1, 0], [0, 1, 1, 0]);
   const depth = useTransform(scrollYProgress, [0, 1, 1, 0], [-1, 710, 710, -1]);
@@ -54,13 +54,26 @@ const FilterEffectsScroller = (props: Props) => {
     [0, 1, 1, 0],
     ["none", "fixed", "fixed", "none"]
   );
+  const containerDisplay = useTransform(
+    scrollYProgress,
+    [0, 0.05, 0.1],
+    ["-100%", "0%", "0%"]
+  );
+  const containerOpacity = useTransform(
+    scrollYProgress,
+    [0, 0.05, 0.1],
+    [0, 0, 1]
+  );
   return (
     <div
       ref={containerRef}
       className="FilterEffectsScroller_Container"
       style={{ "--count": EFFECTS.length }}
     >
-      <div className="FilterEffectsScroller_Content">
+      <motion.div
+        className="FilterEffectsScroller_Content"
+        style={{ y: containerDisplay, opacity: containerOpacity }}
+      >
         {EFFECTS.map((effect, index) => (
           <FilterEffectListScrollItem
             scrollProgress={scrollYProgress}
@@ -69,7 +82,7 @@ const FilterEffectsScroller = (props: Props) => {
             {...effect}
           />
         ))}
-      </div>
+      </motion.div>
       <FilterEffectsVisual scrollProgress={scrollYProgress} />
       <motion.div
         className="FilterEffectsScroller_Gradient top"
