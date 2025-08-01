@@ -4,21 +4,12 @@
  * work well for content-centric websites.
  */
 
-/* You can override the default Infima variables here. */
 :root {
-  --ifm-color-primary: #2e8555;
-  --ifm-color-primary: #29784c;
-  --ifm-color-primaryer: #277148;
-  --ifm-color-primaryest: #205d3b;
-  --ifm-color-primary-light: #33925d;
-  --ifm-color-primary-lighter: #359962;
-  --ifm-color-primary-lightest: #3cad6e;
-  --ifm-code-font-size: 95%;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
-
   /* Color styles */
   --white: rgba(243, 243, 242, 1);
+  --white-transparent: rgba(243, 243, 242, 0);
   --black: rgba(12, 12, 13, 1);
+  --black-transparent: rgba(12, 12, 13, 0);
   --clawdio-100: rgba(248, 234, 234, 1);
   --clawdio-1000-brand: rgba(188, 47, 47, 1);
   --clawdio-1100: rgba(169, 42, 42, 1);
@@ -142,17 +133,18 @@
   /* Gradients */
   --gradient-black-to-transparent: linear-gradient(
     0deg,
-    var(--black) 0%,
-    rgba(12, 12, 13, 0) 100%
+    var(--colors-page-bg) 0%,
+    var(--colors-page-bg-transparent) 100%
   );
   --gradient-transparent-to-black: linear-gradient(
     0deg,
-    rgba(12, 12, 13, 0) 0%,
-    var(--black) 100%
+    var(--colors-page-bg-transparent) 0%,
+    var(--colors-page-bg) 100%
   );
 
   /* Semantic */
   --colors-page-bg: var(--white);
+  --colors-page-bg-transparent: var(--white-transparent);
   --colors-text: var(--gray-12);
 
   /* Breakpoints */
@@ -163,10 +155,22 @@
   --breakpoint-widescreen: 1600px;
 
   /* Overrides */
+  /* You can override the default Infima variables here. */
   --ifm-background-color: var(--colors-page-bg);
   --ifm-navbar-background-color: transparent;
   --ifm-font-family-base: var(--font-family);
   --ifm-font-family-monospace: var(--font-family-mono);
+  --ifm-z-index-fixed: 710;
+
+  --ifm-color-primary: var(--clawdio-1000-brand);
+  --ifm-color-primaryer: var(--clawdio-1100-brand);
+  --ifm-color-primaryest: var(--clawdio-1200-brand);
+  --ifm-color-primary-light: var(--clawdio-900-brand);
+  --ifm-color-primary-lighter: var(--clawdio-800-brand);
+  --ifm-color-primary-lightest: var(--clawdio-700-brand);
+  --ifm-code-font-size: 95%;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+  --ifm-font-weight-semibold: 400;
 }
 
 /* Responsive Variables */
@@ -197,13 +201,12 @@
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
 [data-theme="dark"] {
-  --ifm-color-primary: #25c2a0;
-  --ifm-color-primary: #21af90;
-  --ifm-color-primaryer: #1fa588;
-  --ifm-color-primaryest: #1a8870;
-  --ifm-color-primary-light: #29d5b0;
-  --ifm-color-primary-lighter: #32d8b4;
-  --ifm-color-primary-lightest: #4fddbf;
+  --ifm-color-primary: var(--clawdio-1000-brand);
+  --ifm-color-primaryer: var(--clawdio-1100-brand);
+  --ifm-color-primaryest: var(--clawdio-1200-brand);
+  --ifm-color-primary-light: var(--clawdio-900-brand);
+  --ifm-color-primary-lighter: var(--clawdio-800-brand);
+  --ifm-color-primary-lightest: var(--clawdio-700-brand);
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
 
   --gray-1: rgba(22, 22, 24, 1);
@@ -233,6 +236,7 @@
 
   /* Semantic */
   --colors-page-bg: var(--black);
+  --colors-page-bg-transparent: var(--black-transparent);
 }
 
 body {

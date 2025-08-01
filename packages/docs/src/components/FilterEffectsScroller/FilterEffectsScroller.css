@@ -16,7 +16,7 @@
 
 .FilterEffectsScroller_Box,
 .FilterEffectsScroller_Box .signal {
-  background: var(--black);
+  background: var(--colors-page-bg);
   border-radius: 14px;
 }
 

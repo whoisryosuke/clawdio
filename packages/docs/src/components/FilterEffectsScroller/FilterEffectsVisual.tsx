@@ -42,7 +42,8 @@ const FilterEffectsVisual = ({ scrollProgress, ...props }: Props) => {
   const prevTime = useRef(0);
   const { colorMode } = useColorMode();
   const bgColor = colorMode === "dark" ? "#0C0C0D" : "#EEE";
-  const lineColor = colorMode === "dark" ? "#2E2E32" : "#2E2E32";
+  const lineColor = colorMode === "dark" ? "#2E2E32" : "rgba(144, 142, 150, 1)";
+  const brandColor = colorMode === "dark" ? CLAWDIO_LINE : CLAWDIO_BRAND;
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const fpsRef = useRef<HTMLSpanElement>(null);
 
@@ -66,7 +67,7 @@ const FilterEffectsVisual = ({ scrollProgress, ...props }: Props) => {
     const gradient = ctx.createLinearGradient(0, 0, canvasWidth, 0); // Gradient from (0,0) to (200,0)
     gradient.addColorStop(0, lineColor); // Start color
     gradient.addColorStop(0.3, lineColor); // Middle color
-    gradient.addColorStop(1, CLAWDIO_LINE); // End color
+    gradient.addColorStop(1, brandColor); // End color
 
     ctx.beginPath();
     ctx.lineWidth = 1.5;

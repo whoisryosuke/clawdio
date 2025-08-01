@@ -21,8 +21,9 @@
 /* Clear styles */
 .clw-btn.secondary,
 .clw-btn.ghost {
-  border-color: #232326;
-  filter: drop-shadow(0px 2px 6px #232326);
+  color: var(--color-text);
+  border-color: var(--gray-7);
+  filter: drop-shadow(0px 2px 6px var(--gray-10));
   box-shadow: none;
 }
 
