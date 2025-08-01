@@ -41,8 +41,16 @@ const FilterEffectListScrollItem = ({
     [segmentEnd, segmentMiddleHold, segmentMiddle, segmentStart],
     [path, 0, 0, path]
   );
+  const depth = useTransform(
+    scrollProgress,
+    [segmentEnd, segmentMiddleHold, segmentMiddle, segmentStart],
+    [-1, 420, 420, -1]
+  );
   return (
-    <div className="FilterEffectListItem_Container">
+    <motion.div
+      className="FilterEffectListItem_Container"
+      style={{ zIndex: depth }}
+    >
       <motion.div
         style={{
           display: "flex",
@@ -54,7 +62,7 @@ const FilterEffectListScrollItem = ({
       >
         <FilterEffectListItem {...props} />
       </motion.div>
-    </div>
+    </motion.div>
   );
 };
 
