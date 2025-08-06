@@ -12,7 +12,7 @@ import Admonition from "@theme/Admonition";
 import Mermaid from "@theme/Mermaid";
 
 import type { MDXComponentsObject } from "@theme/MDXComponents";
-import Video from "./Video";
+import Video from "./Video/Video";
 
 const MDXComponents: MDXComponentsObject = {
   Head,
