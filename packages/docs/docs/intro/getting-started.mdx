@@ -1,1 +1,39 @@
+---
+sidebar_position: 1
+---
+
 # Getting Started
+
+Install the library:
+
+```shell
+npm install clawdio
+```
+
+Import the worklet node for the effect you need and use it! Each worklet node function returns an object with an `node` property containing the `AudioWorkletNode` you want.
+
+```tsx
+import { createBitcrusherNode } from "clawdio";
+
+const context = new AudioContext();
+const oscillatorNode = context.createOscillator();
+
+const createBitcrusherWorklet = async (id: string) => {
+  // Create the node using our helper function
+  const bitcrusher = await createBitcrusherNode(context, 4, 0.1);
+
+  // Connect the node
+  oscillatorNode.connect(bitcrusher.node);
+  bitcrusher.node.connect(context.destination);
+};
+
+await createBitcrusherWorklet();
+```
+
+Check the [example app](https://github.com/whoisryosuke/clawdio/tree/main/packages/examples/src/components/) for examples for each module.
+
+## Available modules
+
+- Bitcrusher: [`createBitcrusherNode`](/docs/effects/bitcrusher)
+- Moog Filter: [`createMoogNode`](/docs/effects/moog)
+- Pink Noise: [`createPinkNoiseNode`](/docs/effects/pink-noise)

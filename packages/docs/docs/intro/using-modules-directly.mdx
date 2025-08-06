@@ -1,0 +1,27 @@
+---
+sidebar_position: 2
+---
+
+# Using Modules Directly
+
+If you want greater control over the WASM, you can import each WASM module for each audio effect directly. They're each individually released to NPM alongside the main library.
+
+For example the Bitcrusher node would be:
+
+```shell
+yarn add clawdio-bitcrusher
+```
+
+You can find an example of how to use the WASM and initialize it properly [in the library code](https://github.com/whoisryosuke/clawdio/tree/main/packages/clawdio/src/nodes/BitcrusherNode.ts).
+
+:::tip
+
+Using WASM inside of Audio Worklets is a bit complex, that's why we created this library. If you want to learn more about setting this up from scratch, check out [this blog that covers using WASM in Audio Worklets](https://whoisryosuke.com/blog/2025/processing-web-audio-with-rust-and-wasm).
+
+:::
+
+## WASM Modules
+
+- Bitcrusher: `clawdio-bitcrusher`
+- Moog Filter: `clawdio-moog`
+- Pink Noise: `clawdio-pink-noise`

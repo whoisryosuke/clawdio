@@ -171,6 +171,7 @@
   --ifm-code-font-size: 95%;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
   --ifm-font-weight-semibold: 400;
+  --ifm-pre-padding: var(--space-4);
 }
 
 /* Responsive Variables */
@@ -184,6 +185,7 @@
     --heading-h2: 1.296rem;
     --heading-h3: 1.2rem;
     --heading-h4: 1rem;
+    --ifm-pre-padding: var(--space-2);
   }
 }
 

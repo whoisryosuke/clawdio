@@ -29,6 +29,8 @@ This library includes a series of JavaScript modules you can include in your web
 1. Import the worklet node for the effect you need and use it! Each worklet node function returns an object with an `node` property containing the `AudioWorkletNode` you want.
 
 ```tsx
+import { createBitcrusherNode } from "clawdio";
+
 const context = new AudioContext();
 const oscillatorNode = context.createOscillator();
 
@@ -44,7 +46,7 @@ const createBitcrusherWorklet = async (id: string) => {
 await createBitcrusherWorklet();
 ```
 
-Check the [example app](packages/examples/src/components/) for examples for each module. _Better documentation is coming soon!_
+Check the [example app](packages/examples/src/components/) for examples for each module. And the [documentation site](#) for more details.
 
 ### Using WASM directly
 
