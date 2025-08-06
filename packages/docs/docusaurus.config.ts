@@ -1,6 +1,10 @@
 import { themes as prismThemes } from "prism-react-renderer";
 import type { Config } from "@docusaurus/types";
 import type * as Preset from "@docusaurus/preset-classic";
+import {
+  customPrismThemeDark,
+  customPrismThemeLight,
+} from "./src/styles/prism";
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
@@ -134,8 +138,8 @@ const config: Config = {
       copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
     },
     prism: {
-      theme: prismThemes.github,
-      darkTheme: prismThemes.dracula,
+      theme: customPrismThemeLight,
+      darkTheme: customPrismThemeDark,
     },
   } satisfies Preset.ThemeConfig,
   stylesheets: [

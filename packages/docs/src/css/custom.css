@@ -245,6 +245,10 @@ body {
   font-family: var(--font-family);
 }
 
+.theme-layout-main {
+  margin-bottom: var(--space-8);
+}
+
 /*  Shared Styles */
 
 /* Layout */
