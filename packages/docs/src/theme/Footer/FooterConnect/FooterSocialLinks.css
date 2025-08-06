@@ -1,0 +1,11 @@
+.FooterSocialLink {
+  color: var(--gray-11);
+
+  transition:
+    color 420ms ease-in,
+    transform 420ms ease-in;
+}
+.FooterSocialLink:hover {
+  color: var(--clawdio-1000-brand);
+  transform: rotate(15deg);
+}

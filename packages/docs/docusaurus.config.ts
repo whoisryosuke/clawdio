@@ -97,41 +97,36 @@ const config: Config = {
       style: "dark",
       links: [
         {
-          title: "Docs",
+          title: "Guides",
           items: [
             {
-              label: "Tutorial",
-              to: "/docs/intro",
+              label: "Installation",
+              to: "/docs/installation",
+            },
+            {
+              label: "Getting Started",
+              to: "/docs/getting-started",
+            },
+            {
+              label: "Filters and Effects",
+              to: "/docs/filters-and-effects",
             },
           ],
         },
         {
-          title: "Community",
+          title: "Guides",
           items: [
             {
-              label: "Stack Overflow",
-              href: "https://stackoverflow.com/questions/tagged/docusaurus",
+              label: "Installation",
+              to: "/docs/installation",
             },
             {
-              label: "Discord",
-              href: "https://discordapp.com/invite/docusaurus",
+              label: "Getting Started",
+              to: "/docs/getting-started",
             },
             {
-              label: "X",
-              href: "https://x.com/docusaurus",
-            },
-          ],
-        },
-        {
-          title: "More",
-          items: [
-            {
-              label: "Blog",
-              to: "/blog",
-            },
-            {
-              label: "GitHub",
-              href: "https://github.com/facebook/docusaurus",
+              label: "Filters and Effects",
+              to: "/docs/filters-and-effects",
             },
           ],
         },

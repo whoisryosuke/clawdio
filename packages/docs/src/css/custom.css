@@ -239,8 +239,10 @@
   --colors-page-bg-transparent: var(--black-transparent);
 }
 
+/* Global styles */
 body {
   background-color: var(--colors-page-bg);
+  font-family: var(--font-family);
 }
 
 /*  Shared Styles */

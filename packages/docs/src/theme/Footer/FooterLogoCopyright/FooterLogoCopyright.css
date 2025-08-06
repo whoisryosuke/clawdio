@@ -1,0 +1,14 @@
+.FooterLogoCopyright .logo {
+  width: 150px;
+}
+
+.FooterLogoCopyright .description {
+  color: var(--gray-11);
+  font-size: var(--font-size-6);
+  margin-bottom: 0;
+}
+.FooterLogoCopyright .copyright {
+  color: var(--gray-9);
+  font-size: var(--font-size-5);
+  margin-bottom: 0;
+}
