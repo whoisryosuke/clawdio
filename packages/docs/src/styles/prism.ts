@@ -34,9 +34,3 @@ export const customPrismThemeDark: PrismTheme = {
     }),
   ],
 };
-
-console.log("dark theme", customPrismThemeDark);
-
-customPrismThemeDark.styles.forEach((style) =>
-  console.log("style", style.style)
-);
