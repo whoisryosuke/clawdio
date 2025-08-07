@@ -7,6 +7,81 @@ import Readme from "../../../../modules/bitcrusher/README.md";
 
 <Readme />
 
+## Getting Started
+
+```tsx
+import { createBitcrusherNode } from "clawdio";
+
+const context = new AudioContext();
+const oscillatorNode = context.createOscillator();
+oscillatorNode.start();
+
+const createBitcrusherWorklet = async (id: string) => {
+  // Create the node using our helper function
+  const bitcrusher = await createBitcrusherNode(context, 4, 0.1);
+
+  // Connect the node
+  oscillatorNode.connect(bitcrusher.node);
+  bitcrusher.node.connect(context.destination);
+};
+
+await createBitcrusherWorklet();
+```
+
+## Controls
+
+export const items = [
+  {
+    prop: "Bits",
+    type: "number",
+    default: "4",
+    description: "The resolution of the audio",
+  },
+  {
+    prop: "Norm Freq",
+    type: "number",
+    default: "0.1",
+    description:
+      "0 to 1. The amount of bitcrushing, lower number means stronger effect.",
+  },
+];
+
+<PropsTable items={items} />
+
+### Bits
+
+```tsx
+const bitcrusher = await createBitcrusherNode(context, 4, 0.1);
+const bitcrusherNode = bitcrusher.node;
+
+const setBits = (newBits: number) => {
+  bitcrusherNode.port.postMessage({ type: "set-bits", data: newBits });
+};
+
+// Set the bits inside worklet anytime you need
+setBits(4);
+
+const setNormfreq = (newFreq: number) => {
+  if (!nodeRef) return;
+  nodeRef.port.postMessage({ type: "set-normfreq", data: newFreq });
+};
+```
+
+### Norm Freq
+
+```tsx
+const bitcrusher = await createBitcrusherNode(context, 4, 0.1);
+const bitcrusherNode = bitcrusher.node;
+
+const setNormfreq = (newFreq: number) => {
+  if (!nodeRef) return;
+  nodeRef.port.postMessage({ type: "set-normfreq", data: newFreq });
+};
+
+// Set the norm freq inside worklet anytime you need
+setNormfreq(1);
+```
+
 ## Video Example
 
 import videoUrl from "@site/static/video/effects/bitcrusher.mp4";

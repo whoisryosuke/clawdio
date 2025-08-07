@@ -13,6 +13,7 @@ import Mermaid from "@theme/Mermaid";
 
 import type { MDXComponentsObject } from "@theme/MDXComponents";
 import Video from "./Video/Video";
+import PropsTable from "./PropsTable/PropsTable";
 
 const MDXComponents: MDXComponentsObject = {
   Head,
@@ -31,6 +32,7 @@ const MDXComponents: MDXComponentsObject = {
   h5: (props: ComponentProps<"h5">) => <MDXHeading as="h5" {...props} />,
   h6: (props: ComponentProps<"h6">) => <MDXHeading as="h6" {...props} />,
   Video: Video,
+  PropsTable: PropsTable,
   admonition: Admonition,
   mermaid: Mermaid,
 };

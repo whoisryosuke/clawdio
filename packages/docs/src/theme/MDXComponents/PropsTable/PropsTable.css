@@ -1,0 +1,32 @@
+.PropsTable {
+  width: 100%;
+  border-radius: 14px;
+  padding: var(--space-1);
+
+  display: table;
+  overflow: hidden;
+
+  /* Make table cells borders self contained */
+  border-collapse: separate;
+}
+
+.PropsTable thead td {
+  font-size: var(--font-size-5);
+  color: var(--clawdio-600);
+  background-color: var(--clawdio-1800);
+  border-color: var(--clawdio-1700);
+}
+
+.PropsTable td {
+  border-radius: 6px;
+  border-color: var(--gray-4);
+  overflow: hidden;
+}
+
+.PropsTable tr:nth-child(2n) td {
+  background-color: var(--gray-1);
+}
+
+.PropsTable code {
+  padding: var(--space-0-75);
+}
