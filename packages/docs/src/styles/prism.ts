@@ -18,7 +18,7 @@ export const customPrismThemeDark: PrismTheme = {
     ...prismThemes.synthwave84.plain,
     color: "var(--colors-text)",
     backgroundColor:
-      "linear-gradient(to bottom, var(--gray-2) 75%, var(--gray-3))",
+      "linear-gradient(to bottom, var(--gray-1) 75%, var(--gray-2))",
   },
   styles: [
     ...prismThemes.synthwave84.styles.map((style) => {
@@ -29,6 +29,18 @@ export const customPrismThemeDark: PrismTheme = {
       // Primary color
       if (style?.style?.color?.includes("f87c32")) {
         style.style.color = "var(--clawdio-1000-brand)";
+      }
+      // Other colors
+      // These were just too "white" so we just add color back
+      if (style?.style?.color?.includes("fdfdfd")) {
+        style.style.color = "rgb(3, 237, 249)";
+        style.style.textShadow =
+          "rgb(0, 23, 22) 0px 0px 2px, rgba(3, 237, 249, 0.26) 0px 0px 3px, rgba(3, 237, 249, 0.16) 0px 0px 5px, rgba(3, 237, 249, 0.16) 0px 0px 8px";
+      }
+      if (style?.style?.color?.includes("f4eee4")) {
+        style.style.color = "rgb(243, 83, 5)";
+        style.style.textShadow =
+          "rgb(57, 58, 51) 0px 0px 2px, rgba(243, 83, 5, 0.46) 0px 0px 8px, rgba(243, 83, 5, 0.46) 0px 0px 2px";
       }
       return style;
     }),
