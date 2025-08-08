@@ -3,7 +3,7 @@ import "./Button.css";
 import clsx from "clsx";
 
 type Props = HTMLProps<HTMLButtonElement | HTMLAnchorElement> & {
-  as: keyof HTMLElementTagNameMap;
+  as?: keyof HTMLElementTagNameMap;
   ghost?: boolean;
   secondary?: boolean;
 };

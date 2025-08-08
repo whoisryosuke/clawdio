@@ -1,11 +1,12 @@
 ---
-title: ""
-sidebar_label: Bitcrusher
+title: "Bitcrusher"
 ---
 
-import Readme from "../../../../modules/bitcrusher/README.md";
+# Bitcrusher
 
-<Readme />
+export const graph = [{ type: "osc" }, { type: "bitcrusher" }];
+
+<AudioGraph graph={graph} />
 
 ## Getting Started
 
@@ -60,11 +61,6 @@ const setBits = (newBits: number) => {
 
 // Set the bits inside worklet anytime you need
 setBits(4);
-
-const setNormfreq = (newFreq: number) => {
-  if (!nodeRef) return;
-  nodeRef.port.postMessage({ type: "set-normfreq", data: newFreq });
-};
 ```
 
 ### Norm Freq

@@ -1,0 +1,74 @@
+.AudioGraph {
+  position: relative;
+}
+
+.AudioGraph .overlay {
+  position: absolute;
+  inset: 0;
+  /* background: rgba(0, 0, 0, 0.5); */
+  border-radius: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.AudioGraph .overlay.hidden {
+  opacity: 0;
+  scale: 0;
+}
+
+@media screen and (max-width: 1200px) {
+  .AudioGraph .arrow {
+    transform: rotate(90deg);
+  }
+}
+
+/* Nodes */
+
+.AudioGraphNode {
+  border-radius: 2rem;
+  background: var(--gray-2);
+}
+
+.AudioGraphNode.clawdio {
+  background: var(--clawdio-1700);
+}
+
+[data-theme="light"] {
+  .AudioGraphNode.clawdio {
+    background: var(--clawdio-300);
+  }
+}
+
+.AudioGraphNode > div {
+  padding: 1.5rem;
+  position: relative;
+}
+
+.AudioGraphNode .title,
+.AudioGraphNode .subtitle {
+  font-weight: 400;
+}
+
+.AudioGraphNode .subtitle {
+  color: var(--gray-10);
+  margin-bottom: 0;
+}
+
+.AudioGraphNode canvas {
+  border-radius: 10px;
+}
+
+.AudioGraphNode svg {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+}
+
+.AudioGraph .nodes {
+  opacity: 0.3;
+}
+
+.AudioGraph .nodes.visible {
+  opacity: 1;
+}

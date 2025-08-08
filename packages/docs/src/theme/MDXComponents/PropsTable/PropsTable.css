@@ -30,3 +30,10 @@
 .PropsTable code {
   padding: var(--space-0-75);
 }
+
+[data-theme="light"] {
+  .PropsTable thead td {
+    background-color: var(--clawdio-100);
+    border-color: var(--clawdio-200);
+  }
+}
