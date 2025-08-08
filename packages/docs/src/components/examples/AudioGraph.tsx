@@ -8,6 +8,7 @@ import clsx from "clsx";
 import Button from "../ui/Button/Button";
 import Stack from "../ui/Stack/Stack";
 import { BiRightArrowAlt } from "react-icons/bi";
+import { motion } from "motion/react";
 
 type Props = {
   graph: AudioNodeConfig[];
@@ -101,11 +102,14 @@ const AudioGraph = ({ graph, connectOutput }: Props) => {
           </>
         ))}
       </Stack>
-      <div className={clsx("overlay", loaded && "hidden")}>
+      <motion.div
+        animate={{ opacity: loaded ? 0 : 1, scale: loaded ? 0 : 1 }}
+        className={clsx("overlay")}
+      >
         <Button secondary onClick={handleStart}>
           Start Visualization
         </Button>
-      </div>
+      </motion.div>
     </div>
   );
 };

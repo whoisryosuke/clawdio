@@ -12,9 +12,8 @@
   align-items: center;
 }
 
-.AudioGraph .overlay.hidden {
-  opacity: 0;
-  scale: 0;
+.AudioGraph .overlay button {
+  cursor: pointer;
 }
 
 @media screen and (max-width: 1200px) {
