@@ -21,7 +21,10 @@ const AudioGraphNode = ({ node }: Props) => {
 
   return (
     <div
-      className={clsx("AudioGraphNode", node.type == "bitcrusher" && "clawdio")}
+      className={clsx(
+        "AudioGraphNode GlowStroke",
+        node.type == "bitcrusher" && "clawdio"
+      )}
     >
       <NodeComponent node={node} />
     </div>
