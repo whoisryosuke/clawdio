@@ -25,7 +25,7 @@
 /* Nodes */
 
 .AudioGraphNode {
-  border-radius: 2rem;
+  border-radius: 1rem;
   background: var(--gray-2);
 }
 
@@ -40,8 +40,12 @@
 }
 
 .AudioGraphNode > div {
-  padding: 1.5rem;
+  padding: 1.25rem;
   position: relative;
+}
+
+.AudioGraphNode .title {
+  font-size: var(--heading-h1);
 }
 
 .AudioGraphNode .title,

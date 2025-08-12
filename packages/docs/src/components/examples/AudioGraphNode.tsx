@@ -1,5 +1,9 @@
 import React, { ComponentType, JSX, ReactNode } from "react";
-import { AudioNodeTypes, AudioNodeWrapper } from "./AudioGraph.types";
+import {
+  AudioNodeTypes,
+  AudioNodeWrapper,
+  CLAWDIO_NODES_KEYS,
+} from "./AudioGraph.types";
 import OscillatorGraphNode from "./nodes/OscillatorGraphNode";
 import clsx from "clsx";
 
@@ -23,7 +27,7 @@ const AudioGraphNode = ({ node }: Props) => {
     <div
       className={clsx(
         "AudioGraphNode GlowStroke",
-        node.type == "bitcrusher" && "clawdio"
+        CLAWDIO_NODES_KEYS.includes(node.type) && "clawdio"
       )}
     >
       <NodeComponent node={node} />

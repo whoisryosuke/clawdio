@@ -1,6 +1,10 @@
 import useAudioStore from "@site/src/store/audio";
 import React, { useEffect } from "react";
-import { AudioNodeWrapper } from "../AudioGraph.types";
+import {
+  AUDIO_NODE_TITLES,
+  AudioNodeWrapper,
+  CLAWDIO_NODES_KEYS,
+} from "../AudioGraph.types";
 import Waveform from "./Waveform";
 import Heading from "../../ui/Heading/Heading";
 import ClawdioLogoBug from "../../ClawdioLogo/ClawdioLogoBug";
@@ -13,15 +17,17 @@ const OscillatorGraphNode = ({ node }: Props) => {
   return (
     <div>
       <Heading as="h4" className="subtitle">
-        Audio Node
+        {CLAWDIO_NODES_KEYS.includes(node.type)
+          ? "Audio Worklet"
+          : "Audio Node"}
       </Heading>
       <Heading as="h2" className="title">
-        {node.type}
+        {AUDIO_NODE_TITLES[node.type]}
       </Heading>
       <Waveform
         analyser={node.analyser}
         fps={3}
-        color={node.type == "bitcrusher" ? "clawdio" : "blue"}
+        color={CLAWDIO_NODES_KEYS.includes(node.type) ? "clawdio" : "#2F4EB2"}
       />
       {node.type == "bitcrusher" && (
         <ClawdioLogoBug

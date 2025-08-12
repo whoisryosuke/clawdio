@@ -281,3 +281,15 @@ body {
   border: 1.8px solid var(--gray-5);
   box-shadow: 0px 2px 6px var(--gray-4);
 }
+
+.GlowStroke.clawdio {
+  border: 1.8px solid var(--clawdio-1500);
+  box-shadow: 0px 2px 6px var(--clawdio-1300);
+}
+
+[data-theme="light"] {
+  .GlowStroke.clawdio {
+    border: 1.8px solid var(--clawdio-300);
+    box-shadow: 0px 2px 6px var(--clawdio-200);
+  }
+}

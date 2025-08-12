@@ -23,7 +23,7 @@ type Props = {
 const LineGraph = ({
   analyser,
   animated,
-  color = "blue",
+  color = "#273E89",
   fps,
   ...props
 }: Props) => {
@@ -82,7 +82,7 @@ const LineGraph = ({
       ctx.fillRect(0, 0, canvasWidth, canvasHeight);
 
       ctx.beginPath();
-      ctx.lineWidth = 1.5;
+      ctx.lineWidth = 3.5;
       ctx.strokeStyle = lineColor;
       for (let i = 0; i < canvasWidth; i++) {
         const index = Math.floor(
