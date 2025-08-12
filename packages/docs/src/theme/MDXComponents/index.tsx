@@ -15,6 +15,8 @@ import type { MDXComponentsObject } from "@theme/MDXComponents";
 import Video from "./Video/Video";
 import PropsTable from "./PropsTable/PropsTable";
 import AudioGraph from "@site/src/components/examples/AudioGraph";
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
 
 const MDXComponents: MDXComponentsObject = {
   Head,
@@ -35,6 +37,8 @@ const MDXComponents: MDXComponentsObject = {
   Video: Video,
   PropsTable: PropsTable,
   AudioGraph: AudioGraph,
+  Tabs,
+  TabItem,
   admonition: Admonition,
   mermaid: Mermaid,
 };
