@@ -1,8 +1,138 @@
 ---
-title: ""
+title: "Moog filter"
 sidebar_label: Moog
 ---
 
-import Readme from "../../../../modules/moog/README.md";
+Moog filter is named after the “ladder” filter in Moog synthesizers. It’s a voltage controlled filter (named “ladder” after the shape of the circuit) that creates a warm, thick sound. It’s basically a low-pass filter.
 
-<Readme />
+## Visualization
+
+export const graph = [{ type: "osc" }, { type: "moog" }];
+
+<AudioGraph graph={graph} />
+
+## Quick Start
+
+<Tabs>
+<TabItem value="js" label="JavaScript">
+
+```ts
+import { createBitcrusherNode } from "clawdio";
+
+const context = new AudioContext();
+const oscillatorNode = context.createOscillator();
+oscillatorNode.start();
+
+const createMoogWorklet = async (id: string) => {
+  // highlight-start
+  // Create the node using our helper function
+  const moog = await createMoogNode(context);
+  // highlight-end
+
+  // Connect the node
+  oscillatorNode.connect(moog.node);
+  moog.node.connect(context.destination);
+};
+
+await createMoogWorklet();
+```
+
+</TabItem>
+<TabItem value="react" label="React">
+
+```tsx
+import { useCallback, useEffect, useRef } from "react";
+import useAudioStore from "@/store/audio";
+import { createMoogNode } from "clawdio";
+import type { MoogNode } from "clawdio";
+
+type Props = {
+  resonance?: number;
+  cutoff?: number;
+};
+
+const Moog = ({ resonance = 4, cutoff = 0.1 }: Props) => {
+  const nodeRef = useRef<MoogNode | null>(null);
+  const { audioCtx, addAudioNode, removeAudioNode } = useAudioStore();
+
+  const createNode = useCallback(async () => {
+    nodeRef.current = await createMoogNode(audioCtx, 4, 0.1);
+
+    addAudioNode("moog", nodeRef.current.node);
+  }, [addAudioNode, audioCtx]);
+
+  useEffect(() => {
+    if (!audioCtx || nodeRef.current) return;
+    createNode();
+
+    return () => {
+      if (nodeRef.current) removeAudioNode("moog");
+      nodeRef.current?.node.disconnect();
+    };
+  }, [audioCtx, createNode, removeAudioNode]);
+
+  useEffect(() => {
+    nodeRef.current?.setResonance(resonance);
+  }, [resonance]);
+
+  useEffect(() => {
+    nodeRef.current?.setCutoff(cutoff);
+  }, [cutoff]);
+
+  return <></>;
+};
+
+export default Moog;
+```
+
+</TabItem>
+
+</Tabs>
+
+## Controls
+
+export const items = [
+  {
+    prop: "Resonance",
+    type: "number",
+    default: "4",
+    description: "Sets base resonance of signal",
+  },
+  {
+    prop: "Cutoff",
+    type: "number",
+    default: "0.1",
+    description:
+      "0 to 1. The amount of cutoff, higher number means stronger effect.",
+  },
+];
+
+<PropsTable items={items} />
+
+### Resonance
+
+```tsx
+const moog = await createMoogNode(context);
+const moogNode = moog.node;
+
+const setResonance = (resonance: number) => {
+  moogNode.port.postMessage({ type: "set-resonance", data: resonance });
+};
+
+// Set the bits inside worklet anytime you need
+setResonance(1);
+```
+
+### Cutoff
+
+```tsx
+const moog = await createMoogNode(context);
+const moogNode = moog.node;
+
+const setCutoff = (cutoff: number) => {
+  moogNode.port.postMessage({ type: "set-cutoff", data: cutoff });
+};
+
+// Set the bits inside worklet anytime you need
+setCutoff(1);
+```

@@ -179,9 +179,54 @@
   --ifm-table-stripe-background: transparent;
 }
 
+.theme-code-block-highlighted-line {
+  --docusaurus-highlighted-code-line-bg: rgba(150, 38, 38, 0.1);
+  padding-top: 0.25rem;
+  padding-bottom: 1rem;
+}
+
 .navbar-sidebar,
 .docs-wrapper .navbar {
   --ifm-navbar-background-color: var(--colors-page-bg);
+}
+
+.docs-wrapper #__docusaurus,
+.navbar--fixed-top .navbar__inner {
+  max-width: 1600px;
+  margin: auto;
+}
+
+.tabs {
+  gap: 1rem;
+  overflow: visible;
+}
+.tabs__item {
+  padding: 12px 14px;
+  padding-right: 128px;
+  border-radius: 8px;
+
+  background: var(--gray-1);
+  color: var(--color-text);
+  border-color: var(--gray-7);
+  box-shadow: none;
+}
+
+.tabs__item:hover {
+  background: var(--gray-3);
+}
+
+.tabs__item.tabs__item--active {
+  background: radial-gradient(50% 220.45% at 50% 50%, #842121 0%, #4b1313 100%);
+  box-shadow: 0px 2px 12px var(--clawdio-1600);
+  background-size: 200% 100%;
+  background-position: 50% 0;
+  border-color: var(--clawdio-1400);
+}
+
+.tabs__item.tabs__item--active:hover {
+  background-position: 100% 0;
+  box-shadow: 0px 2px 8px var(--clawdio-1600);
+  border-color: var(--clawdio-1200);
 }
 
 /* Responsive Variables */

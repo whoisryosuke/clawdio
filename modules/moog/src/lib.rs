@@ -44,7 +44,7 @@ impl MoogModule {
         let input_factor = 0.35013 * (f * f) * (f * f);
         let fb = (self.resonance * (1.0 - 0.15 * f * f)).clamp(0.0, 0.95);
 
-        // Loop over samples and apply bitcrusher effect
+        // Loop over samples and apply moog filter
         for sample in samples.iter_mut() {
             let mut base = *sample;
             base -= self.out4 * fb;

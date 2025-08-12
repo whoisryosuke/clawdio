@@ -13,6 +13,8 @@ const AUDIO_NODES_COMPONENTS: Record<
 > = {
   osc: OscillatorGraphNode,
   bitcrusher: OscillatorGraphNode,
+  moog: OscillatorGraphNode,
+  "pink-noise": OscillatorGraphNode,
 };
 
 type Props = {

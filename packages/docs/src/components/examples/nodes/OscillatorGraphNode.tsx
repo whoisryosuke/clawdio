@@ -29,7 +29,7 @@ const OscillatorGraphNode = ({ node }: Props) => {
         fps={3}
         color={CLAWDIO_NODES_KEYS.includes(node.type) ? "clawdio" : "#2F4EB2"}
       />
-      {node.type == "bitcrusher" && (
+      {CLAWDIO_NODES_KEYS.includes(node.type) && (
         <ClawdioLogoBug
           color="var(--clawdio-1000-brand)"
           width="36px"

@@ -1,7 +1,6 @@
 .PropsTable {
   width: 100%;
   border-radius: 14px;
-  padding: var(--space-1);
 
   display: table;
   overflow: hidden;

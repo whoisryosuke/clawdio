@@ -1,11 +1,85 @@
 ---
-title: ""
+title: "Pink Noise"
 sidebar_label: Pink Noise
 ---
 
-import Readme from "../../../../modules/pink-noise/README.md";
+Pink noise sounds like waves on a beach, a waterfall, or a gentle “whoosh” sound. It’s a common sound signature that’s found in nature.
 
-<Readme />
+## Visualization
+
+export const graph = [{ type: "pink-noise" }];
+
+<AudioGraph graph={graph} />
+
+## Quick Start
+
+<Tabs>
+<TabItem value="js" label="JavaScript">
+
+```ts
+import { createPinkNoiseNode } from "clawdio";
+
+const context = new AudioContext();
+const oscillatorNode = context.createOscillator();
+oscillatorNode.start();
+
+const createPinkNoiseWorklet = async (id: string) => {
+  // highlight-start
+  // Create the node using our helper function
+  const pinkNoise = await createPinkNoiseNode(context);
+  // highlight-end
+
+  // Connect the node
+  oscillatorNode.connect(pinkNoise.node);
+  pinkNoise.node.connect(context.destination);
+};
+
+await createPinkNoiseWorklet();
+```
+
+</TabItem>
+<TabItem value="react" label="React">
+
+```tsx
+import { useCallback, useEffect, useRef } from "react";
+import useAudioStore from "@/store/audio";
+import { createPinkNoiseNode } from "clawdio";
+import type { PinkNoiseNode } from "clawdio";
+
+type Props = {
+  resonance?: number;
+  cutoff?: number;
+};
+
+const PinkNoise = ({ resonance = 4, cutoff = 0.1 }: Props) => {
+  const nodeRef = useRef<PinkNoiseNode | null>(null);
+  const { audioCtx, addAudioNode, removeAudioNode } = useAudioStore();
+
+  const createNode = useCallback(async () => {
+    nodeRef.current = await createPinkNoiseNode(audioCtx);
+
+    addAudioNode("pink-noise", nodeRef.current.node);
+  }, [addAudioNode, audioCtx]);
+
+  useEffect(() => {
+    if (!audioCtx || nodeRef.current) return;
+    createNode();
+
+    return () => {
+      if (nodeRef.current) removeAudioNode("pink-noise");
+      nodeRef.current?.node.disconnect();
+    };
+  }, [audioCtx, createNode, removeAudioNode]);
+
+  return <></>;
+};
+
+export default PinkNoise;
+```
+
+</TabItem>
+
+</Tabs>
 
 ## Video Example
 

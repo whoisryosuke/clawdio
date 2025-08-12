@@ -2,8 +2,6 @@
 
 Moog filter implemented as a Rust module that gets exported to web using WASM.
 
-Moog filter is named after the “ladder” filter in Moog synthesizers. It’s a voltage controlled filter (named “ladder” after the shape of the circuit) that creates a warm, thick sound. It’s basically a low-pass filter.
-
 ## Development
 
 Read the [shared module documentation](../README.MD) for a full guide on running this locally.

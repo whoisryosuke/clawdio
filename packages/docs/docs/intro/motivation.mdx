@@ -1,5 +1,5 @@
 ---
-sidebar_position: 3
+sidebar_position: 4
 ---
 
 # Motivation
@@ -8,7 +8,7 @@ This library was created to simplify the process of leveraging WASM inside of Au
 
 ## Why WASM?
 
-You might ask yourself: is it really more efficient to take a whole other language, compile it down to bits, and run that inside of JavaScript? And I’d say: in some cases actually yeah.
+You might ask yourself: is it really more efficient to take a whole other language, compile it down to bits, and run that inside of JavaScript? And I’d say: in some cases - actually yeah.
 
 ### Garbage free since 2023
 
@@ -27,3 +27,11 @@ You might not be aware, but [most audio code](https://github.com/BillyDM/awesome
 And to be honest, C and C++ have been around the longest, so their ecosystem is the most mature. You’ll find that most Rust modules are wrappers around existing C libraries.
 
 So to be able to leverage that ecosystem and other libraries is incredibly valuable, instead of having to convert their code to JavaScript (and hope it’s nearly as efficient).
+
+## Why Rust
+
+Rust as a programming language has proven itself to be just as powerful as the titans of low level langugages, like C++. It's easy to get started with projects and dependencies thanks to it's [Cargo CLI](https://doc.rust-lang.org/cargo/). And it's memory management is next level, with a fantastic [first party linter](https://github.com/rust-lang/rustfmt) to assist with navigating it's ownership model.
+
+Rust is growing in popularity for several fields, from graphics to game dev to audio programming -- there's new crates releasing and updating constantly to populate and evolve the ecosystem.
+
+And it's becoming a standard, alongside C++, for using with Web Assembly (or WASM). There's plenty of Rust-based tooling that simplifies the process. Which is the primary use case of this library.

@@ -1,5 +1,9 @@
 import useAudioStore from "@site/src/store/audio";
-import { createBitcrusherNode } from "clawdio";
+import {
+  createBitcrusherNode,
+  createMoogNode,
+  createPinkNoiseNode,
+} from "clawdio";
 import React, { useEffect, useRef, useState } from "react";
 import { AudioNodeConfig, AudioNodeWrapper } from "./AudioGraph.types";
 import AudioGraphNode from "./AudioGraphNode";
@@ -51,6 +55,16 @@ const AudioGraph = ({ graph, connectOutput }: Props) => {
           const bitcrusher = await createBitcrusherNode(context, 4, 0.1);
           bitcrusher.node.connect(analyser);
           newNodes.push({ type: node.type, ...bitcrusher, analyser });
+          break;
+        case "moog":
+          const moog = await createMoogNode(context);
+          moog.node.connect(analyser);
+          newNodes.push({ type: node.type, ...moog, analyser });
+          break;
+        case "pink-noise":
+          const pinkNoise = await createPinkNoiseNode(context);
+          pinkNoise.node.connect(analyser);
+          newNodes.push({ type: node.type, ...pinkNoise, analyser });
           break;
       }
       if (index > 0) {

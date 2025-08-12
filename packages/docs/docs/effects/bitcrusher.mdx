@@ -4,6 +4,8 @@ title: "Bitcrusher"
 
 # Bitcrusher
 
+## Visualization
+
 export const graph = [{ type: "osc" }, { type: "bitcrusher" }];
 
 <AudioGraph graph={graph} />
@@ -21,8 +23,10 @@ const oscillatorNode = context.createOscillator();
 oscillatorNode.start();
 
 const createBitcrusherWorklet = async (id: string) => {
+  // highlight-start
   // Create the node using our helper function
   const bitcrusher = await createBitcrusherNode(context, 4, 0.1);
+  // highlight-end
 
   // Connect the node
   oscillatorNode.connect(bitcrusher.node);

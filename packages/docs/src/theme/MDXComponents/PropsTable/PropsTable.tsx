@@ -14,7 +14,7 @@ type Props = {
 
 const PropsTable = ({ items }: Props) => {
   return (
-    <table className="PropsTable GlowStroke">
+    <table className="PropsTable ">
       <thead>
         <tr>
           <td>Property</td>
