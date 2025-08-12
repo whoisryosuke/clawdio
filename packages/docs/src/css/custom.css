@@ -196,6 +196,20 @@
   margin: auto;
 }
 
+.docMainContainer_namt {
+  --ifm-spacing-horizontal: 3rem;
+}
+@media screen and (max-width: 1200px) {
+  .docMainContainer_namt {
+    --ifm-spacing-horizontal: 2rem;
+  }
+}
+@media screen and (max-width: 450px) {
+  .docMainContainer_namt {
+    --ifm-spacing-horizontal: 1rem;
+  }
+}
+
 .tabs {
   gap: 1rem;
   overflow: visible;

@@ -14,8 +14,8 @@ const Waveform = ({ analyser, fps, color }: Props) => {
   return (
     <LineGraph
       analyser={analyser}
-      width={400}
-      height={200}
+      width={350}
+      height={150}
       fps={fps}
       color={color}
       animated
