@@ -154,6 +154,10 @@
   --breakpoint-desktop: 1200px;
   --breakpoint-widescreen: 1600px;
 
+  /* Animation */
+  --easing-in-out-cubic: cubic-bezier(0.65, 0, 0.35, 1);
+  --easing-in-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+
   /* Overrides */
   /* You can override the default Infima variables here. */
   --ifm-background-color: var(--colors-page-bg);
@@ -175,7 +179,8 @@
   --ifm-table-stripe-background: transparent;
 }
 
-.navbar-sidebar {
+.navbar-sidebar,
+.docs-wrapper .navbar {
   --ifm-navbar-background-color: var(--colors-page-bg);
 }
 
