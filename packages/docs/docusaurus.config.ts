@@ -105,15 +105,15 @@ const config: Config = {
           items: [
             {
               label: "Installation",
-              to: "clawdio/docs/installation",
+              to: "docs/installation",
             },
             {
               label: "Getting Started",
-              to: "clawdio/docs/getting-started",
+              to: "docs/getting-started",
             },
             {
               label: "How it Works",
-              to: "clawdio/docs/how-it-works",
+              to: "docs/how-it-works",
             },
           ],
         },
@@ -122,15 +122,15 @@ const config: Config = {
           items: [
             {
               label: "Bitcrusher",
-              to: "clawdio/docs/effects/bitcrusher",
+              to: "docs/effects/bitcrusher",
             },
             {
               label: "Moog",
-              to: "clawdio/docs/effects/moog",
+              to: "docs/effects/moog",
             },
             {
               label: "Pink Noise",
-              to: "clawdio/docs/effects/pink-noise",
+              to: "docs/effects/pink-noise",
             },
           ],
         },

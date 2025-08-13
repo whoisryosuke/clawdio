@@ -20,7 +20,7 @@ const EFFECTS: FilterEffectListItemProps[] = [
     packageName: "clawdio-moog",
     description: `Named after the “ladder” filter in Moog synthesizers, it mimics the voltage control to create a warm, thick sound.`,
     path: 700,
-    url: "clawdio/docs/effects/moog",
+    url: "docs/effects/moog",
   },
   {
     signal: <PinkNoiseSignal />,
@@ -28,7 +28,7 @@ const EFFECTS: FilterEffectListItemProps[] = [
     packageName: "clawdio-pink-noise",
     description: `Pink noise sounds like waves on a beach, a waterfall, or a gentle “whoosh” sound. It’s a common sound signature that’s found in nature.`,
     path: 4000,
-    url: "clawdio/docs/effects/pink-noise",
+    url: "docs/effects/pink-noise",
   },
   {
     signal: <BitcrusherSignal />,
@@ -37,7 +37,7 @@ const EFFECTS: FilterEffectListItemProps[] = [
     description: `Bitcrusher creates a crunchy "8-bit" sound by lowering the
             resolution of the signal.`,
     path: 1000,
-    url: "clawdio/docs/effects/bitcrusher",
+    url: "docs/effects/bitcrusher",
   },
 ];
 
