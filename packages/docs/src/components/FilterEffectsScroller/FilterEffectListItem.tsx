@@ -10,6 +10,7 @@ export type FilterEffectListItemProps = {
   title: string;
   description: string;
   path?: number;
+  url: string;
 };
 
 const FilterEffectListItem = ({
@@ -17,6 +18,7 @@ const FilterEffectListItem = ({
   packageName,
   title,
   description,
+  url,
 }: FilterEffectListItemProps) => {
   return (
     <Stack
@@ -44,7 +46,7 @@ const FilterEffectListItem = ({
           {description}
         </Heading>
         <Stack horizontal>
-          <Button as="a" href="#" ghost>
+          <Button as="a" href={url} ghost>
             Learn more
           </Button>
         </Stack>

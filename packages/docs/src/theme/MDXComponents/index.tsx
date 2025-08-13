@@ -17,6 +17,8 @@ import PropsTable from "./PropsTable/PropsTable";
 import AudioGraph from "@site/src/components/examples/AudioGraph";
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
+import Bluesky from "./Bluesky";
+import YouTube from "./YouTube";
 
 const MDXComponents: MDXComponentsObject = {
   Head,
@@ -39,6 +41,8 @@ const MDXComponents: MDXComponentsObject = {
   AudioGraph: AudioGraph,
   Tabs,
   TabItem,
+  Bluesky,
+  YouTube,
   admonition: Admonition,
   mermaid: Mermaid,
 };
