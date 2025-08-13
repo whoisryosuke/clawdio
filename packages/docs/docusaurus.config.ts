@@ -75,7 +75,7 @@ const config: Config = {
 
   themeConfig: {
     // Replace with your project's social card
-    image: "img/docusaurus-social-card.jpg",
+    image: "img/social-card.png",
     navbar: {
       title: "",
       logo: {
@@ -105,37 +105,37 @@ const config: Config = {
           items: [
             {
               label: "Installation",
-              to: "/docs/installation",
+              to: "clawdio/docs/installation",
             },
             {
               label: "Getting Started",
-              to: "/docs/getting-started",
+              to: "clawdio/docs/getting-started",
             },
             {
-              label: "Filters and Effects",
-              to: "/docs/filters-and-effects",
+              label: "How it Works",
+              to: "clawdio/docs/how-it-works",
             },
           ],
         },
         {
-          title: "Guides",
+          title: "Effects",
           items: [
             {
-              label: "Installation",
-              to: "/docs/installation",
+              label: "Bitcrusher",
+              to: "clawdio/docs/effects/bitcrusher",
             },
             {
-              label: "Getting Started",
-              to: "/docs/getting-started",
+              label: "Moog",
+              to: "clawdio/docs/effects/moog",
             },
             {
-              label: "Filters and Effects",
-              to: "/docs/filters-and-effects",
+              label: "Pink Noise",
+              to: "clawdio/docs/effects/pink-noise",
             },
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+      copyright: `Copyright © ${new Date().getFullYear()}.`,
     },
     prism: {
       theme: customPrismThemeLight,

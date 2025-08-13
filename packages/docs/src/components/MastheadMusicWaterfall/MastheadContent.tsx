@@ -16,10 +16,10 @@ const MastheadContent = (props: Props) => {
           Audio API using WASM and Rust.
         </h2>
         <Stack horizontal centered responsive>
-          <Button as="a" href="/docs/intro/getting-started">
+          <Button as="a" href="clawdio/docs/intro/getting-started">
             Getting Started
           </Button>
-          <Button as="a" href="/docs/examples/" secondary>
+          <Button as="a" href="clawdio/docs/examples/" secondary>
             See Examples
           </Button>
         </Stack>

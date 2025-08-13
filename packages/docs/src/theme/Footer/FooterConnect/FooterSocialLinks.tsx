@@ -11,37 +11,32 @@ import "./FooterSocialLinks.css";
 const LINKS = [
   {
     icon: GitHubIcon,
-    href: "#",
+    href: "https://github.com/whoisryosuke/",
     title: "GitHub",
   },
-  {
-    icon: DiscordIcon,
-    href: "#",
-    title: "Discord",
-  },
+  // {
+  //   icon: DiscordIcon,
+  //   href: "#",
+  //   title: "Discord",
+  // },
   {
     icon: ThreadsIcon,
-    href: "#",
+    href: "https://www.threads.com/@whoisryosuke",
     title: "Threads",
   },
   {
     icon: BlueskyIcon,
-    href: "#",
+    href: "https://bsky.app/profile/whoisryosuke.bsky.social",
     title: "Bluesky",
   },
   {
     icon: InstagramIcon,
-    href: "#",
+    href: "https://www.instagram.com/whoisryosuke/",
     title: "Instagram",
   },
   {
-    icon: ThreadsIcon,
-    href: "#",
-    title: "Threads",
-  },
-  {
     icon: YouTubeIcon,
-    href: "#",
+    href: "https://www.youtube.com/@whoisryosuke",
     title: "YouTube",
   },
 ];

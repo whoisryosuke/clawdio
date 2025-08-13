@@ -12,6 +12,7 @@
     "build:modules": "node scripts/build.js",
     "publish:modules": "node scripts/release-modules.js",
     "build:library": "yarn workspace clawdio build",
+    "dev:docs": "yarn workspace docs start",
     "build:docs": "yarn workspace docs build"
   }
 }

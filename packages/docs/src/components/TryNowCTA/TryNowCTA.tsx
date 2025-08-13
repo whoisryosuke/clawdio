@@ -16,7 +16,7 @@ const TryNowCTA = (props: Props) => {
           <Heading as="h2" style={{ color: "var(--gray-10)" }}>
             Three simple steps: install, import, and use!
           </Heading>
-          <Button as="a" href="/docs/intro/introduction">
+          <Button as="a" href="clawdio/docs/intro/introduction">
             Browse the docs
           </Button>
         </Stack>
