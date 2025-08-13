@@ -1,20 +1,15 @@
-# Website
+# Clawdio Documentation
 
-This website is built using [Docusaurus](https://docusaurus.io/), a modern static website generator.
+[The documentation site](https://whoisryosuke.github.io/clawdio/) for the `clawdio` library.
 
-## Installation
+## Getting Started
 
 ```bash
 yarn
-```
-
-## Local Development
-
-```bash
 yarn start
 ```
 
-This command starts a local development server and opens up a browser window. Most changes are reflected live without having to restart the server.
+This opens a documentation site at http://localhost:3000/clawdio/
 
 ## Build
 
@@ -26,16 +21,8 @@ This command generates static content into the `build` directory and can be serv
 
 ## Deployment
 
-Using SSH:
+Commit changes to `main` branch and documentation will automatically deploy using GitHub Actions.
 
-```bash
-USE_SSH=true yarn deploy
-```
+## Credits
 
-Not using SSH:
-
-```bash
-GIT_USER=<Your GitHub username> yarn deploy
-```
-
-If you are using GitHub pages for hosting, this command is a convenient way to build the website and push to the `gh-pages` branch.
+- [Docusaurus](https://docusaurus.io/)
