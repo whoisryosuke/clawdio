@@ -13,8 +13,6 @@ const FooterLinks = (props: Props) => {
   }
   const { copyright, links, logo, style } = footer;
 
-  console.log("links", links);
-
   return (
     <Stack horizontal gap="3em">
       {links.map((column) => (
