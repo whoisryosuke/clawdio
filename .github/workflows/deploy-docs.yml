@@ -1,8 +1,8 @@
 name: Deploy to GitHub Pages
 
-defaults:
-  run:
-    working-directory: ./packages/docs
+# defaults:
+#   run:
+#     working-directory: ./packages/docs
 
 on:
   push:
@@ -28,7 +28,7 @@ jobs:
       - name: Install dependencies
         run: yarn install --frozen-lockfile
       - name: Build website
-        run: yarn build
+        run: yarn build:docs
 
       - name: Upload Build Artifact
         uses: actions/upload-pages-artifact@v3
