@@ -2,17 +2,19 @@
 
 # Clawdio
 
-An experimental project aimed to create modern effects for the Web Audio API using WASM and Rust.
+An experimental library for creating modern audio effects for the Web Audio API using WASM and Rust.
 
 We leverage the [Audio Worklet API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API/Using_AudioWorklet) to offload audio processing to a separate thread, then use [WebAssembly (WASM)](https://webassembly.org/) to process the audio even faster using [Rust](https://www.rust-lang.org/).
 
 This library includes a series of JavaScript modules you can include in your web audio projects to create different effects.
 
+**[Browse the documentation here](https://whoisryosuke.github.io/clawdio/)**
+
 ## Effects
 
-- **Bitcrusher** (8-bit effect)
-- **Moog Filter** (Low-pass filter)
-- **Pink Noise** (Procedural noise)
+- **[Bitcrusher](https://whoisryosuke.github.io/clawdio/docs/effects/bitcrusher)** (8-bit effect)
+- **[Moog Filter](https://whoisryosuke.github.io/clawdio/docs/effects/moog)** (Low-pass filter)
+- **[Pink Noise](https://whoisryosuke.github.io/clawdio/docs/effects/pink-noise)** (Procedural noise)
 
 ## Features
 
@@ -46,7 +48,7 @@ const createBitcrusherWorklet = async (id: string) => {
 await createBitcrusherWorklet();
 ```
 
-Check the [example app](packages/examples/src/components/) for examples for each module. And the [documentation site](#) for more details.
+Check the [example app](packages/examples/src/components/) for examples for each module. And the [documentation site](https://whoisryosuke.github.io/clawdio/docs/intro/getting-started) for more details.
 
 ### Using WASM directly
 
